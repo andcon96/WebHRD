@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('username');
             $table->string('email')->unique();
-            $table->string('domain', 25);
             $table->unsignedBigInteger('role_id')->index();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('restrict');
             $table->unsignedBigInteger('role_type_id')->index();

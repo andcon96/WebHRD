@@ -125,18 +125,6 @@
 
 
           <div class="form-group row">
-            <label for="domain" class="col-md-3 col-form-label text-md-right">Domain</label>
-            <div class="col-md-5">
-              {{-- <select id="domain" class="form-control role" name="domain" required autofocus>
-                <option value=''> Choose Domain </option>
-                @foreach($domain as $domain)
-                <option value='{{$domain->xdomain_code}}'> {{$domain->xdomain_code}}</option>
-                @endforeach
-              </select> --}}
-              <input type="text" class="form-control role" name="domain" required autofocus>
-            </div>
-          </div>
-          <div class="form-group row">
             <label for="email" class="col-md-3 col-form-label text-md-right">E-Mail</label>
             <div class="col-md-7">
               <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
@@ -195,13 +183,6 @@
             <label for="d_uname" class="col-md-3 col-form-label text-md-right">Username</label>
             <div class="col-md-7 {{ $errors->has('d_uname') ? 'has-error' : '' }}">
               <input id="d_uname" type="text" class="form-control" name="d_uname" value="{{ old('d_uname') }}" readonly
-                autofocus>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="d_domain" class="col-md-3 col-form-label text-md-right">Domain</label>
-            <div class="col-md-7">
-              <input id="d_domain" type="text" class="form-control" name="d_domain" value="{{ old('domain') }}" readonly
                 autofocus>
             </div>
           </div>
@@ -451,11 +432,11 @@
 
   $(document).on('click', '.editUser', function() { // Click to only happen on announce links
 
-    //alert('123');
+    // alert('123');
     var uid = $(this).data('id');
     var username = $(this).data('uname');
     var name = $(this).data('name');
-    var domain = $(this).data('domain');
+    // var domain = $(this).data('domain');
     var email = $(this).data('email');
 
     var role_type = $(this).data('roletype');
@@ -465,7 +446,7 @@
     document.getElementById("t_id").value = uid;
     document.getElementById("d_uname").value = username;
     document.getElementById("d_name").value = name;
-    document.getElementById("d_domain").value = domain;
+    // document.getElementById("d_domain").value = domain;
     document.getElementById("d_email").value = email;
     document.getElementById("t_role").value = role;
 
@@ -497,72 +478,11 @@
 
     $("#role").change(function() {
       var value = $(this).val();
-      if (value == 'Purchasing') {
-        //alert('123');
-        //$('.supplier').hide();
-        document.getElementById("supplierid").style.display = "none";
-        // document.getElementById("suppliername").style.display = "none";
-        document.getElementById("divDept").style.display = "";
-
-        $("#selectDept").prop('required', true);
-        $("#suppname").prop('required', false);
-        $("#suppid").prop('required', false);
-      } else if (value == 'Supplier') {
-        document.getElementById("supplierid").style.display = "";
-        // document.getElementById("suppliername").style.display = "";
-        document.getElementById("divDept").style.display = "none";
-        $("#selectDept").prop('required', false);
-        $("#suppname").prop('required', true);
-        $("#suppid").prop('required', true);
-      } else if (value == 'Admin') {
-        document.getElementById('supplierid').style.display = "none";
-        // document.getElementById('suppliername').style.display = "none";
-        document.getElementById("divDept").style.display = "none";
-        $("#selectDept").prop('required', false);
-        $("#suppname").prop('required', false);
-        $("#suppid").prop('required', false);
-      }
-
-      if (value == 'Purchasing') {
-        // Ambil data Purhcasing taro di roletype 
-
-        jQuery.ajax({
+      jQuery.ajax({
           type: "get",
           url: "{{URL::to("searchoptionuser") }}",
           data: {
-            search: 'Purchasing',
-          },
-          success: function(data) {
-            console.log(data);
-            $('#roletype').find('option').remove().end().append('<option value="">Select Data</option>');
-            for (var i = 0; i < data.length; i++) {
-              $('#roletype').append('<option value="' + data[i].id + '">' + data[i].role_type + '</option>');
-            }
-          }
-        });
-
-      } else if (value == 'Supplier') {
-        // Ambil data Supplier taro di roletype
-        jQuery.ajax({
-          type: "get",
-          url: "{{URL::to("searchoptionuser") }}",
-          data: {
-            search: 'Supplier',
-          },
-          success: function(data) {
-            console.log(data);
-            $('#roletype').find('option').remove().end().append('<option value="">Select Data</option>');
-            for (var i = 0; i < data.length; i++) {
-              $('#roletype').append('<option value="' + data[i].id + '">' + data[i].role_type + '</option>');
-            }
-          }
-        });
-      } else if (value == 'Super_User') {
-        jQuery.ajax({
-          type: "get",
-          url: "{{URL::to("searchoptionuser") }}",
-          data: {
-            search: 'Super_User',
+            search: value,
           },
           success: function(data) {
             console.log(data);
@@ -576,7 +496,6 @@
             }
           }
         });
-      }
     });
     $('form').on("submit", function() {
       document.getElementById('btnclose').style.display = 'none';

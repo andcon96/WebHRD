@@ -27,7 +27,6 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->name,
                 'username' => $faker->userName,
                 'email' => $faker->unique()->safeEmail,
-                'domain' => '10USA',
                 'role_id' => Role::all()->random()->id,
                 'role_type_id' => RoleType::all()->random()->id,
                 'isActive' => 1,
