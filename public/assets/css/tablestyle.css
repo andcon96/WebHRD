@@ -116,6 +116,9 @@ tbody .fas{
       width: 90%;
       max-width: 1200px;
   }
+    .form-group{
+      padding-left:20px !important;
+    }
 }
 
 /* .fas{
@@ -126,9 +129,6 @@ tbody .fas{
   color:#000066;
 } */
 
-.form-group{
-  padding-left:20px !important;
-}
 
 
 @media (min-width: 992px){

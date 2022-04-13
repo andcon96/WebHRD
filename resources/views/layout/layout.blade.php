@@ -4,11 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Web LMA</title>
+  <title>Web Harindra</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{url('assets/lte/fontawesome-free/css/all.min.css')}}">
   <!-- IonIcons -->
@@ -53,19 +52,15 @@
       <ul class="navbar-nav ml-auto">
 
         <!-- Notifications Dropdown Menu -->
-        <a class="nav-link mr-2" data-toggle="dropdown" id="alertsDropdown" href="javascript:void(0)"
-          aria-expanded="false">
+        <a class="nav-link mr-2" data-toggle="dropdown" id="alertsDropdown" href="javascript:void(0)" aria-expanded="false">
           <i class="fas fa-bell"></i>
           <span class="badge badge-primary">{{ auth()->user()->unreadNotifications->count() }}</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" aria-labelledby="alertsDropdown"
-          style="overflow-y:scroll; max-height: 250px; max-width:500px !important;">
-          <a class="dropdown-item text-center small font-weight-bold mark-as-read-all" href="javascript:void(0)"
-            data-id="{{ Session::get('userid') }}">Mark All as Read</a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" aria-labelledby="alertsDropdown" style="overflow-y:scroll; max-height: 250px; max-width:500px !important;">
+          <a class="dropdown-item text-center small font-weight-bold mark-as-read-all" href="javascript:void(0)" data-id="{{ Session::get('userid') }}">Mark All as Read</a>
           <div class="dropdown-divider"></div>
           @forelse(Auth::User()->unreadNotifications as $notif)
-          <a id="bell" href="{{$notif->data['url']}}" data-id="{{$notif->id}}" data-link="{{$notif->data['url']}}"
-            class="dropdown-item mark-as-read" style="text-wrap:break-word">
+          <a id="bell" href="{{$notif->data['url']}}" data-id="{{$notif->id}}" data-link="{{$notif->data['url']}}" class="dropdown-item mark-as-read" style="text-wrap:break-word">
             <div class="media">
               <i class="fas fa-envelope mr-2"></i>
               <div class="media-body">
@@ -107,8 +102,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{url('/')}}" class="brand-link">
-        <img src="{{url('images/imi.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
+        <img src="{{url('images/imi.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">IMI Modules</span>
       </a>
 
@@ -118,16 +112,114 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             @can('access_dashboard')
-              <li class="nav-item">
-                <a href="{{url('/home')}}" class="nav-link">
-                  <i class="nav-icon fas fa-home"></i>
-                  <p>
-                    Home
-                  </p>
-                </a>
-              </li>
+            <li class="nav-item">
+              <a href="{{url('/home')}}" class="nav-link">
+                <i class="nav-icon fas fa-home"></i>
+                <p>
+                  Home
+                </p>
+              </a>
+            </li>
             @endcan
+
             <li class="nav-header">TRANSAKSI</li>
+
+            @can('access_so_side')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shopping-basket"></i>
+                <p>
+                  Sales Order
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @can('access_so')
+                <li class="nav-item">
+                  <a href="{{route('salesorder.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>SO Maintenance</p>
+                  </a>
+                </li>
+                @endcan
+                @can('access_so_sangu')
+                <li class="nav-item">
+                  <a href="{{route('sosangu.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Alokasi Sangu SO</p>
+                  </a>
+                </li>
+                @endcan
+              </ul>
+            </li>
+            @endcan
+            @can('access_trip_side')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                  Trip
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @can('access_trip')
+                <li class="nav-item">
+                  <a href="{{route('tripmt.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Trip Browse</p>
+                  </a>
+                </li>
+                @endcan
+                @can('access_lapor_trip')
+                <li class="nav-item">
+                  <a href="{{route('laportrip.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lapor Trip Maintenance</p>
+                  </a>
+                </li>
+                @endcan
+                @can('access_lapor_sj')
+                <li class="nav-item">
+                  <a href="{{route('laporsj.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lapor Surat jalan</p>
+                  </a>
+                </li>
+                @endcan
+                @can('access_lapor_kerusakan')
+                <li class="nav-item">
+                  <a href="{{route('laporkerusakan.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lapor Kerusakan</p>
+                  </a>
+                </li>
+                @endcan
+              </ul>
+            </li>
+            @endcan
+            @can('access_drive_side')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shopping-basket"></i>
+                <p>
+                  Driver Check In
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @can('access_check_in_out')
+                <li class="nav-item">
+                  <a href="{{route('checkinout.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Driver Check In / Out</p>
+                  </a>
+                </li>
+                @endcan
+              </ul>
+            </li>
+            @endcan
+
 
             @can('access_masters')
             <li class="nav-header">MASTER</li>
@@ -159,9 +251,39 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('sitemaint.index')}}" class="nav-link">
+                  <a href="{{route('deptmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Site Maintenance</p>
+                    <p>Department Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('kerusakanmt.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Kerusakan Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('strukturkerusakanmt.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Struktur Kerusakan Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('truckmaint.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Truck Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('truckdrivemaint.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Truck Driver Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('prefixmaint.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Prefix Maintenance</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -252,8 +374,7 @@
 
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

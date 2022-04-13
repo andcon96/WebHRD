@@ -114,10 +114,10 @@ class RoleMTController extends Controller
 
             DB::commit();
 
-            $request->session()->flash('updated', 'Role type successfully updated');
+            alert()->success('Success', 'Role Type Succesfully Updated');
         } catch (\Exception $err) {
             DB::rollBack();
-            $request->session()->flash('error', 'Failed to update role type');
+            alert()->error('Error', 'Failed to updated Role Type');
         }
 
         return redirect()->back();
@@ -139,10 +139,10 @@ class RoleMTController extends Controller
 
             DB::commit();
 
-            $request->session()->flash('updated', 'Role type successfully deleted');
+            alert()->success('Success', 'Role Type Succesfully Deleted');
         } catch (\Exception $err) {
             DB::rollBack();
-            $request->session()->flash('error', 'Failed to delete role type');
+            alert()->error('Error', 'Failed to delete Role Type');
         }
 
         return redirect()->back();

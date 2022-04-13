@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\Department;
 use App\Models\Master\Role;
 use App\Models\Master\RoleType;
 use App\Models\Master\User;
@@ -25,6 +26,8 @@ class UserMTController extends Controller
         
         $roleType = RoleType::get();
 
+        $dept = Department::get();
+
         if ($request->ajax()) {
             $username = $request->username;
             $name = $request->name;
@@ -46,7 +49,7 @@ class UserMTController extends Controller
 
             return view('setting.users.table', compact('users'));
         } else {
-            return view('setting.users.index', compact('users', 'roleType'));
+            return view('setting.users.index', compact('users', 'roleType', 'dept'));
         }
     }
 
@@ -72,6 +75,7 @@ class UserMTController extends Controller
             'username' => 'required|unique:users',
             'name' => 'required',
             'email' => 'required|email|unique:users',
+            'dept' => 'required',
             'password' => 'required|min:8|max:20',
             'password_confirmation' => 'required|min:8|max:20|same:password',
         ], [
@@ -80,11 +84,12 @@ class UserMTController extends Controller
 
         $users = User::where('isActive', 1)->get();
         if ($users->count() >= 13) {
-            $request->session()->flash('error', 'Exceeded Maximum Allowed User');
+            alert()->error('Error', 'Exceeded Maximum Allowed User');
             return back();
         }
 
         $role = $request->role;
+        $dept = $request->dept;
 
         $password = $request->password;
 
@@ -100,6 +105,7 @@ class UserMTController extends Controller
             $storeUser->password = Hash::make($password);
             $storeUser->role_id = $role_id;
             $storeUser->role_type_id = $request->input('roletype');
+            $storeUser->dept_id = $dept;
 
             $storeUser->isActive = 1;
             $storeUser->save();
@@ -162,6 +168,7 @@ class UserMTController extends Controller
         $name = $request->name;
         $email = $request->email;
         $roletype = $request->roletype;
+        $dept = $request->dept;
 
         DB::beginTransaction();
 
@@ -172,6 +179,7 @@ class UserMTController extends Controller
             $user->username = $username;
             $user->email = $email;
             $user->role_type_id = $roletype;
+            $user->dept_id = $dept;
             if ($user->isDirty()) {
                 $user->save();
             }
@@ -180,6 +188,7 @@ class UserMTController extends Controller
             alert()->success('Success', 'User updated successfully');
         } catch (\Exception $err) {
             //throw $th;
+            dd($err);
             DB::rollBack();
             alert()->error('Error', 'Failed to update user');
         }
@@ -199,10 +208,10 @@ class UserMTController extends Controller
 
         if ($user->isActive == 1) {
             $user->isActive = 0;
-            $request->session()->flash('updated', 'User successfully De-Activated ');
+            alert()->success('Success', 'User successfully De-Activated');
         } else {
             $user->isActive = 1;
-            $request->session()->flash('updated', 'User successfully Activated ');
+            alert()->success('Success', 'User successfully Activated');
         }
         $user->save();
 

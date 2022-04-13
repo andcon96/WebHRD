@@ -46,8 +46,7 @@
 
   <div class="col-md-2 offset-md-1">
     <input type="button" class="btn bt-ref" id="btnsearch" value="Search" />
-    <button class="btn bt-action" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i
-        class="fa fa-sync"></i></button>
+    <button class="btn bt-action" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i class="fa fa-sync"></i></button>
   </div>
 </div>
 
@@ -55,8 +54,8 @@
   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Username</th>
+        <th>Nama User</th>
+        <th>Kode User</th>
         <th>Role</th>
         <th>Role Type</th>
         <th>Status</th>
@@ -91,17 +90,15 @@
 
         <div class="modal-body">
           <div class="form-group row">
-            <label for="username" class="col-md-3 col-form-label text-md-right">Username</label>
+            <label for="username" class="col-md-3 col-form-label text-md-right">Kode User</label>
             <div class="col-md-5 {{ $errors->has('uname') ? 'has-error' : '' }}">
-              <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}"
-                autocomplete="off" maxlength="8" required autofocus>
+              <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" autocomplete="off" maxlength="8" required autofocus>
             </div>
           </div>
           <div class="form-group row">
-            <label for="name" class="col-md-3 col-form-label text-md-right">Name</label>
+            <label for="name" class="col-md-3 col-form-label text-md-right">Nama User</label>
             <div class="col-md-5">
-              <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autocomplete="off"
-                autofocus required>
+              <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autocomplete="off" autofocus required>
             </div>
           </div>
           <div class="form-group row">
@@ -123,12 +120,22 @@
             </div>
           </div>
 
+          <div class="form-group row">
+            <label for="dept" class="col-md-3 col-form-label text-md-right">Department</label>
+            <div class="col-md-7">
+              <select id="dept" class="form-control role" name="dept" required autofocus>
+                <option value=""> Select Data </option>
+                @foreach($dept as $depts)
+                <option value="{{$depts->id}}">{{$depts->department_code}} -- {{$depts->department_name}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
 
           <div class="form-group row">
             <label for="email" class="col-md-3 col-form-label text-md-right">E-Mail</label>
             <div class="col-md-7">
-              <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
-                autocomplete="off" required>
+              <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autocomplete="off" required>
             </div>
           </div>
           <div class="form-group row">
@@ -180,24 +187,21 @@
           <input type="hidden" name='d_suppname' id='t_suppname'>
           <input type="hidden" name="lastPage" value="{{$users->lastPage()}}" />
           <div class="form-group row">
-            <label for="d_uname" class="col-md-3 col-form-label text-md-right">Username</label>
+            <label for="d_uname" class="col-md-3 col-form-label text-md-right">Kode User</label>
             <div class="col-md-7 {{ $errors->has('d_uname') ? 'has-error' : '' }}">
-              <input id="d_uname" type="text" class="form-control" name="d_uname" value="{{ old('d_uname') }}" readonly
-                autofocus>
+              <input id="d_uname" type="text" class="form-control" name="d_uname" value="{{ old('d_uname') }}" readonly autofocus>
             </div>
           </div>
           <div class="form-group row">
-            <label for="d_name" class="col-md-3 col-form-label text-md-right">Name</label>
+            <label for="d_name" class="col-md-3 col-form-label text-md-right">Nama User</label>
             <div class="col-md-7">
-              <input id="d_name" type="text" class="form-control" autocomplete="off" name="name"
-                value="{{ old('name') }}" autofocus required>
+              <input id="d_name" type="text" class="form-control" autocomplete="off" name="name" value="{{ old('name') }}" autofocus required>
             </div>
           </div>
           <div class="form-group row">
             <label for="d_email" class="col-md-3 col-form-label text-md-right">E-Mail</label>
             <div class="col-md-7">
-              <input id="d_email" type="email" class="form-control" autocomplete="off" name="email"
-                value="{{ old('email') }}" required>
+              <input id="d_email" type="email" class="form-control" autocomplete="off" name="email" value="{{ old('email') }}" required>
             </div>
           </div>
           <div class="form-group row">
@@ -209,8 +213,17 @@
             </div>
           </div>
 
-
-
+          <div class="form-group row">
+            <label for="e_dept" class="col-md-3 col-form-label text-md-right">Department</label>
+            <div class="col-md-7">
+              <select id="e_dept" class="form-control dept" name="dept" required autofocus>
+                <option value=""> Select Data </option>
+                @foreach($dept as $depts)
+                <option value="{{$depts->id}}">{{$depts->department_code}} -- {{$depts->department_name}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
         </div>
 
         <div class="modal-footer">
@@ -226,8 +239,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -248,8 +260,7 @@
 
           <div class="container">
             <div class="row">
-              Are you sure you want to &nbsp; <a name="temp_status" id="temp_status"></a> &nbsp; user :&nbsp; <a
-                name="temp_uname" id="temp_uname"></a> &nbsp;?
+              Are you sure you want to &nbsp; <a name="temp_status" id="temp_status"></a> &nbsp; user :&nbsp; <a name="temp_uname" id="temp_uname"></a> &nbsp;?
             </div>
           </div>
 
@@ -286,10 +297,9 @@
           <input type='hidden' name='c_id' id='c_id' />
 
           <div class="form-group row">
-            <label for="c_uname" class="col-md-3 col-form-label text-md-right">Username</label>
+            <label for="c_uname" class="col-md-3 col-form-label text-md-right">Kode User</label>
             <div class="col-md-7 {{ $errors->has('d_uname') ? 'has-error' : '' }}">
-              <input id="c_uname" type="text" class="form-control" name="c_uname" value="{{ old('d_uname') }}" readonly
-                autofocus>
+              <input id="c_uname" type="text" class="form-control" name="c_uname" value="{{ old('d_uname') }}" readonly autofocus>
             </div>
           </div>
           <div class="form-group row">
@@ -328,34 +338,6 @@
 @section('scripts')
 
 <script type="text/javascript">
-  // $(document).on('click', '.pagination a', function(e) {
-  //   e.preventDefault();
-
-  //   //alert('123');
-  //   var page = $(this).attr('href').split('?page=')[1];
-
-  //   //console.log(page);
-  //   getData(page);
-
-  // });
-
-  // function getData(page){
-  //     $.ajax({
-  //         url: '/user/getdata?page='+ page,
-  //         type: "get",
-  //         datatype: "html" 
-  //     }).done(function(data){
-  //             console.log('Page = '+ page);
-
-  //             $(".tag-container").empty().html(data);
-
-  //     }).fail(function(jqXHR, ajaxOptions, thrownError){
-  //         Swal.fire({
-  //             icon: 'error',
-  //             text: 'No Response From Server',
-  //         })
-  //     });
-  // }
 
   function fetch_data(page, username, name) {
     $.ajax({
@@ -436,6 +418,7 @@
     var uid = $(this).data('id');
     var username = $(this).data('uname');
     var name = $(this).data('name');
+    var dept = $(this).data('dept');
     // var domain = $(this).data('domain');
     var email = $(this).data('email');
 
@@ -449,6 +432,7 @@
     // document.getElementById("d_domain").value = domain;
     document.getElementById("d_email").value = email;
     document.getElementById("t_role").value = role;
+    $('#e_dept').val(dept);
 
     jQuery.ajax({
       type: "get",
@@ -460,9 +444,9 @@
         console.log(data);
         $('#t_roletype').find('option').remove().end().append('<option value="">Select Data</option>');
         for (var i = 0; i < data.length; i++) {
-          if(role_type == data[i].role_type){
+          if (role_type == data[i].role_type) {
             $('#t_roletype').append('<option value="' + data[i].id + '" selected>' + data[i].role_type + '</option>');
-          }else{
+          } else {
             $('#t_roletype').append('<option value="' + data[i].id + '">' + data[i].role_type + '</option>');
           }
         }
@@ -479,23 +463,23 @@
     $("#role").change(function() {
       var value = $(this).val();
       jQuery.ajax({
-          type: "get",
-          url: "{{URL::to("searchoptionuser") }}",
-          data: {
-            search: value,
-          },
-          success: function(data) {
-            console.log(data);
-            $('#roletype').find('option').remove().end().append('<option value="">Select Data</option>');
-            for (var i = 0; i < data.length; i++) {
-              if (data[i].role_type == 'Super_User') {
-                $('#roletype').append('<option value="' + data[i].id + '">Super User</option>');
-              } else {
-                $('#roletype').append('<option value="' + data[i].id + '">' + data[i].role_type + '</option>');
-              }
+        type: "get",
+        url: "{{URL::to("searchoptionuser") }}",
+        data: {
+          search: value,
+        },
+        success: function(data) {
+          console.log(data);
+          $('#roletype').find('option').remove().end().append('<option value="">Select Data</option>');
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].role_type == 'Super_User') {
+              $('#roletype').append('<option value="' + data[i].id + '">Super User</option>');
+            } else {
+              $('#roletype').append('<option value="' + data[i].id + '">' + data[i].role_type + '</option>');
             }
           }
-        });
+        }
+      });
     });
     $('form').on("submit", function() {
       document.getElementById('btnclose').style.display = 'none';

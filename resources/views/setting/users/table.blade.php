@@ -26,7 +26,7 @@
     <td data-title="Edit" class="action">
       <a href="" class="editUser" data-toggle="modal" data-target="#editModal" data-id="{{$show->id}}" 
         data-uname="{{$show->username}}" data-name="{{$show->name}}" data-role="{{$show->getRole->role}}" 
-        data-domain="{{$show->domain}}" data-email="{{$show->email}}"
+        data-domain="{{$show->domain}}" data-email="{{$show->email}}" data-dept="{{$show->dept_id}}"
         data-roletype="{{$show->getRoleType->role_type}}" 
       ><i class="fas fa-edit"></i></a>
     </td>

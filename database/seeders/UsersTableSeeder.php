@@ -29,6 +29,7 @@ class UsersTableSeeder extends Seeder
                 'email' => $faker->unique()->safeEmail,
                 'role_id' => Role::all()->random()->id,
                 'role_type_id' => RoleType::all()->random()->id,
+                'dept_id' => Department::all()->random()->id,
                 'isActive' => 1,
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),

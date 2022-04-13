@@ -64,10 +64,10 @@ class SiteMTController extends Controller
 
             DB::commit();
 
-            $request->session()->flash('updated', 'Site successfully created');
+            alert()->success('Success', 'Site Successfully Created');
         } catch (\Exception $err) {
             DB::rollBack();
-            $request->session()->flash('error', 'Failed to save site');
+            alert()->error('Error', 'Failed to save Site');
         }
 
         return redirect()->back();
@@ -121,12 +121,11 @@ class SiteMTController extends Controller
             $sites->save();
 
             DB::commit();
-
-            $request->session()->flash('updated', 'Site successfully updated');
+            alert()->success('Success', 'Site Successfully updated');
         } catch (\Exception $err) {
             DB::rollBack();
 
-            $request->session()->flash('error', 'Failed to update site');
+            alert()->error('Error', 'Failed to update Site');
         }
 
         return redirect()->back();
@@ -150,11 +149,10 @@ class SiteMTController extends Controller
 
             DB::commit();
 
-            $request->session()->flash('updated', 'Site successfully deleted');
+            alert()->success('Success', 'Site Successfully Deleted');
         } catch (\Exception $err) {
             DB::rollBack();
-
-            $request->session()->flash('error', 'Failed to delete site');
+            alert()->error('Error', 'Failed to delete Site');
         }
         
         return redirect()->back();

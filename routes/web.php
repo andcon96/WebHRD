@@ -1,15 +1,27 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Master\DepartmentController;
 use App\Http\Controllers\Master\AccessRoleMenuController;
+use App\Http\Controllers\Master\CustomerController;
+use App\Http\Controllers\Master\DepartmentController;
+use App\Http\Controllers\Master\KerusakanController;
+use App\Http\Controllers\Master\PrefixController;
 use App\Http\Controllers\Master\RoleMTController;
 use App\Http\Controllers\Master\UserMTController;
 use App\Http\Controllers\Master\QxWsaMTController;
-use App\Http\Controllers\Master\SiteMTController;
-use App\Http\Controllers\Transaksi\PO\POReceiptController;
+use App\Http\Controllers\Master\StrukturKerusakanController;
+use App\Http\Controllers\Master\TruckDriverController;
+use App\Http\Controllers\Master\TruckMTController;
 use App\Http\Controllers\NotificationController;
-use App\Models\Transaksi\PurchaseOrder;
+use App\Http\Controllers\Transaksi\BrowsePolisController;
+use App\Http\Controllers\Transaksi\CheckInOutController;
+use App\Http\Controllers\Transaksi\KerusakanLaporMTController;
+use App\Http\Controllers\Transaksi\SalesOrderController;
+use App\Http\Controllers\Transaksi\SalesOrderSanguController;
+use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
+use App\Http\Controllers\Transaksi\TripLaporMTController;
+use App\Http\Controllers\Transaksi\TripMTController;
+use App\Models\Transaksi\SalesOrderMstr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -39,22 +51,45 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/mark-all-as-read', [NotificationController::class, 'notifreadall'])->name('notifreadall');
     //================================
 
+    Route::group(['middleware'=>'can:access_so'], function(){
+        Route::resource('salesorder', SalesOrderController::class);
+        Route::get('/salesorder/getdetail/{id}', [SalesOrderController::class, 'getdetail'])->name('getDetailSO');
+        Route::get('/getum', [SalesOrderController::class, 'getUM'])->name('getum');
+    });
 
-    /** 
-     * Transaction
-     */
+    Route::group(['middleware'=>'can:access_so_sangu'], function(){
+        Route::resource('sosangu', SalesOrderSanguController::class);
+    });
 
-    Route::group(['middleware'=>'can:po_receipt'],function (){
-        Route::resource('poreceipt', POReceiptController::class);
-        Route::get('searchpo', [POReceiptController::class, 'searchPO'])->name('searchPO');
-        Route::get('showreceipt', [POReceiptController::class, 'showReceipt'])->name('showReceipt');
-        Route::post('submitreceipt', [POReceiptController::class, 'submitReceipt'])->name('submitReceipt');
+    Route::group(['middleware'=>'can:access_trip'], function(){
+        Route::resource('tripmt', TripMTController::class);
+    });
+
+    Route::group(['middleware'=>'can:access_no_polis'], function(){
+        Route::resource('browsepolis', BrowsePolisController::class);
+    });
+
+    Route::group(['middleware'=>'can:access_lapor_trip'], function(){
+        Route::resource('laportrip', TripLaporMTController::class);
+    });
+
+    Route::group(['middleware'=>'can:access_lapor_sj'], function(){
+        Route::resource('laporsj', SuratJalanLaporMTController::class);
+        Route::get('laporsj/{so}/{truck}', [SuratJalanLaporMTController::class, 'laporsj'])->name('LaporSJ');
+        Route::post('updatesj', [SuratJalanLaporMTController::class, 'updatesj'])->name('updateSJ');
+    });
+
+    Route::group(['middleware'=>'can:access_lapor_kerusakan'], function(){
+        Route::resource('laporkerusakan', KerusakanLaporMTController::class);
+        Route::get('assignkr/{id}', [KerusakanLaporMTController::class, 'assignkr'])->name('assignKR');
+        Route::put('upassignkr/{id}', [KerusakanLaporMTController::class, 'upassignkr'])->name('UpAssignKR');
+    });
+
+    Route::group(['middleware'=>'can:access_check_in_out'], function(){
+        Route::resource('checkinout', CheckInOutController::class);
     });
 
     
-    /**
-     * Group yang bisa akses menu settings
-     */
     Route::group(['middleware'=>'can:access_masters'], function () {
         //================================
         // User Maintenance
@@ -63,12 +98,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/user/getdata', [UserMTController::class, 'index']);
         Route::get('/searchoptionuser', [UserMTController::class, 'searchoptionuser']);
         Route::post('/adminchangepass', [UserMTController::class, 'adminchangepass']);
-        //================================
-
-        //================================
-        // Department Maintenance
-        //================================
-        Route::resource('deptmaint', DepartmentController::class);
         //================================
 
         //================================
@@ -85,11 +114,47 @@ Route::group(['middleware' => ['auth']], function () {
         //================================
 
         //================================
-        // Site Maintenance
+        // Truck Maintenance
         //================================
-        Route::resource('sitemaint', SiteMTController::class);
+        Route::resource('truckmaint', TruckMTController::class);
+        //================================
+        
+        //================================
+        // Kerusakan Maintenance
+        //================================
+        Route::resource('kerusakanmt', KerusakanController::class);
         //================================
 
+        //================================
+        // Struktur Kerusakan Maintenance
+        //================================
+        Route::resource('strukturkerusakanmt', StrukturKerusakanController::class);
+        //================================
+
+        //================================
+        // Truck Driver Maintenance
+        //================================
+        Route::resource('truckdrivemaint', TruckDriverController::class);
+        //================================
+
+        //================================
+        // Customer Maintenance
+        //================================
+        Route::resource('customermaint', CustomerController::class);
+        //================================
+
+        //================================
+        // Prefix Maintenance
+        //================================
+        Route::resource('prefixmaint', PrefixController::class);
+        //================================
+
+        //================================
+        // Department Maintenance
+        //================================
+        Route::resource('deptmaint', DepartmentController::class);
+        //================================
+        
         // QX WSA Master
         //================================
         Route::resource('qxwsa', QxWsaMTController::class);
