@@ -24,7 +24,7 @@
                     <td>{{$datas->sos_sangu}}</td>
                     <td>{{$datas->sos_tot_trip}}</td>
                     <td>{{$datas->countLaporanHist->count()}}</td>
-                    <td></td>
+                    <td>{{$datas->countLaporanHist->whereNotNull('soh_sj')->count() > 0 ? 'Yes' : 'No'}}</td>
                 </tr>
             @empty
             <tr>
