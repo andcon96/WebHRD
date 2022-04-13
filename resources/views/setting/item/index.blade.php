@@ -4,7 +4,7 @@
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ url('/') }}">Master</a></li>
-        <li class="breadcrumb-item active">Customer Maintenance</li>
+        <li class="breadcrumb-item active">Item Maintenance</li>
     </ol>
 @endsection
 
@@ -12,21 +12,21 @@
 
     <!-- page heading -->
     <div class="col-md-12 col-lg-8 offset-lg-2 mb-4">
-        <form action="{{ route('customermaint.store', 'create') }}}" method="POST">
+        <form action="{{ route('itemmaint.store', 'create') }}}" method="POST">
             {{ method_field('post') }}
             {{ csrf_field() }}
             <input type="submit" class="btn bt-action" data-toggle="modal" data-target="#loadingtable"
                 data-backdrop="static" data-keyboard="false" id="btnrefresh" value="Load Table" />
         </form>
 
-        <form action="{{route('customermaint.index')}}" method="get">
+        <form action="{{route('itemmaint.index')}}" method="get">
             <div class="row form-group mt-4">
-                <label for="s_custcode" class="col-md-2 col-form-label">{{ __('Customer Code') }}</label>
+                <label for="s_itemcode" class="col-md-2 col-form-label">{{ __('Item Code') }}</label>
                 <div class="col-md-4">
-                    <select name="s_custcode" id="s_custcode" class="form-control">
+                    <select name="s_itemcode" id="s_itemcode" class="form-control">
                         <option value="">Select Data</option>
-                        @foreach($listcust as $listcusts)
-                            <option value="{{$listcusts->id}}">{{$listcusts->cust_code}} -- {{$listcusts->cust_desc}}</option>
+                        @foreach($listitem as $listitems)
+                            <option value="{{$listitems->id}}">{{$listitems->item_part}} -- {{$listitems->item_desc}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -42,17 +42,18 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th width="20%">Customer Code</th>
-                    <th>Customer Desc</th>
+                    <th width="20%">Item Code</th>
+                    <th>Item Desc</th>
+                    <th width="10%">Item EA</th>
                     <th width="15%">Site</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($cust as $show)
+                @forelse($item as $items)
                     <tr>
-                        <td>{{ $show->cust_code }}</td>
-                        <td>{{ $show->cust_desc }}</td>
-                        <td>{{ $show->cust_site }}</td>
+                        <td>{{ $items->item_part }}</td>
+                        <td>{{ $items->item_desc }}</td>
+                        <td>{{ $items->item_um }}</td>
                     </tr>
                 @empty
                     <tr>
@@ -61,7 +62,7 @@
                 @endforelse
             </tbody>
         </table>
-        {{ $cust->withQueryString()->links() }}
+        {{ $item->withQueryString()->links() }}
     </div>
 
 
@@ -79,7 +80,7 @@
 
 @section('scripts')
     <script>
-        $('#s_custcode').select2({
+        $('#s_itemcode').select2({
             width : '100%',
         });
     </script>

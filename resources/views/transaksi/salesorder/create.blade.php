@@ -106,7 +106,7 @@
         var cols = "";
         cols += '<td data-title="Line" data-label="Line"><input type="hidden" name="operation[]" class="operation" value="M"><input type="number" class="form-control line" autocomplete="off" name="line[]" style="height:37px" required min="1" value="' + lastline + '"/></td>';
         cols += '<td data-label="Item Part">';
-        cols += '<select id="barang" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="part[]" data-live-search="true" required autofocus>';
+        cols += '<select id="barang" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="part[]" data-size="5" data-live-search="true" required autofocus>';
         cols += '<option value = ""> -- Select Data -- </option>'
         @foreach($item as $items)
         cols += '<option value="{{$items->item_part}}"> {{$items->item_part}} -- {{$items->item_desc}} </option>';

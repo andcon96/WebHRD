@@ -116,7 +116,7 @@ class SalesOrderController extends Controller
 
     public function edit(SalesOrderMstr $salesOrderMstr, $id)
     {
-        $data = SalesOrderMstr::with('getDetail')->findOrFail($id);
+        $data = SalesOrderMstr::with('getDetail.getItem')->findOrFail($id);
         $item = Item::get();
         return view('transaksi.salesorder.edit',compact('data','item'));
     }
@@ -201,14 +201,14 @@ class SalesOrderController extends Controller
 
 
     public function getdetail($id){
-        $data = SalesOrderDetail::where('sod_so_mstr_id',$id)->get();
+        $data = SalesOrderDetail::with('getItem')->where('sod_so_mstr_id',$id)->get();
         $output = '<tr><td colspan="7"> No Data Avail </td></tr>';
         if($data->count() > 0){
             $output = '';
             foreach($data as $datas){
                 $output .= '<tr>';
                 $output .= '<td>'.$datas->sod_line.'</td>';
-                $output .= '<td>'.$datas->sod_part.'</td>';
+                $output .= '<td>'.$datas->sod_part.' - '.$datas->getItem->item_desc .'</td>';
                 $output .= '<td>'.$datas->sod_um.'</td>';
                 $output .= '<td>'.$datas->sod_qty_ord.'</td>';
                 $output .= '<td>'.$datas->sod_qty_ship.'</td>';

@@ -16,11 +16,18 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cust = Customer::get();
+        $cust = Customer::query();
+        $listcust = Customer::get();
 
-        return view('setting.customer.index',['cust' => $cust]);
+        if($request->s_custcode){
+            $cust->where('id',$request->s_custcode);
+        }
+
+        $cust = $cust->paginate(10);
+
+        return view('setting.customer.index',['cust' => $cust, 'listcust' => $listcust]);
     }
 
     public function store()

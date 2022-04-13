@@ -19,6 +19,7 @@ class CreateKerusakanMstrTable extends Migration
             $table->unsignedBigInteger('kerusakan_truck_driver')->index();
             $table->foreign('kerusakan_truck_driver')->references('id')->on('truckdriver')->onDelete('restrict');
             $table->date('kerusakan_date');
+            $table->enum('kerusakan_status',['New','Ongoing','Done','Cancelled']);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

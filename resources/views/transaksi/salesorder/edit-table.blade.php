@@ -16,7 +16,10 @@
                 <input type="hidden" name="operation[]" class="operation" value="M">
                 <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                 <td><input type="number" class="form-control" value="{{$datas->sod_line}}" name="line[]" readonly></td>
-                <td><input type="text" class="form-control" value="{{$datas->sod_part}}" name="part[]" readonly></td>
+                <td>
+                    <input type="hidden" value="{{$datas->sod_part}}" name="part[]">
+                    <input type="text" class="form-control" value="{{$datas->sod_part}} - {{$datas->getItem->item_desc}}" readonly>
+                </td>
                 <td><input type="text" class="form-control" value="{{$datas->sod_um}}" name="um[]" readonly></td>
                 <td><input type="number" class="form-control" value="{{$datas->sod_qty_ord}}" name="qtyord[]" min="{{$datas->sod_qty_ship}}"></td>
                 <td><input type="number" class="form-control" value="{{$datas->sod_qty_ship}}" name="qtyship[]" readonly></td>

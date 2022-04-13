@@ -79,7 +79,7 @@ class KerusakanLaporMTController extends Controller
             }
 
             $prefix = Prefix::firstOrFail();
-            $prefix->rn_so = substr($getrn, 2, 6);
+            $prefix->rn_kerusakan = substr($getrn, 2, 6);
             $prefix->save();
 
             DB::commit();
@@ -87,7 +87,6 @@ class KerusakanLaporMTController extends Controller
             return back();
         } catch (Exception $e) {
             DB::rollBack();
-            dd($e);
             alert()->error('Error', 'Failed to create data');
             return back();
         }

@@ -10,4 +10,8 @@ class StrukturKerusakan extends Model
     use HasFactory;
 
     public $table = 'struktur_lapor_kerusakan';
+
+    protected $fillable = [
+        'slk_order',
+    ];
 }

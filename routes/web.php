@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Master\AccessRoleMenuController;
 use App\Http\Controllers\Master\CustomerController;
 use App\Http\Controllers\Master\DepartmentController;
+use App\Http\Controllers\Master\ItemMTController;
 use App\Http\Controllers\Master\KerusakanController;
 use App\Http\Controllers\Master\PrefixController;
 use App\Http\Controllers\Master\RoleMTController;
@@ -141,6 +142,12 @@ Route::group(['middleware' => ['auth']], function () {
         // Customer Maintenance
         //================================
         Route::resource('customermaint', CustomerController::class);
+        //================================
+
+        //================================
+        // Item Maintenance
+        //================================
+        Route::resource('itemmaint', ItemMTController::class);
         //================================
 
         //================================

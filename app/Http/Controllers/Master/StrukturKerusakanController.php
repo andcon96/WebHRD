@@ -18,14 +18,13 @@ class StrukturKerusakanController extends Controller
     }
 
     public function store(Request $request){
+        // dd($request->all());
         DB::beginTransaction();
 
         try{
-            StrukturKerusakan::truncate();
 
             foreach($request->order as $key => $datas){
-                $newdata = new StrukturKerusakan();
-                $newdata->slk_order = $datas;
+                $newdata = StrukturKerusakan::firstOrNew(['slk_order' => $datas]);
                 $newdata->slk_desc = $request->desc[$key];
                 $newdata->save();
             }

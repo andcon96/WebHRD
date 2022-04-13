@@ -257,6 +257,18 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="{{route('customermaint.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Customer Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('itemmaint.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Item Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{{route('kerusakanmt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Kerusakan Maintenance</p>
