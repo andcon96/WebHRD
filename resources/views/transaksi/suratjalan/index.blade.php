@@ -12,8 +12,8 @@
 
 <form action="" method="GET">
     <div class="form-group row">
-        <label for="polis" class="col-form-label text-md-right" style="margin-left:25px">{{ __('Truck') }}</label>
-        <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12">
+        <label for="polis" class="col-form-label text-md-right mt-2" style="margin-left:25px">{{ __('Truck') }}</label>
+        <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12 mt-2">
             <select name="truck" id="truck" class="form-control">
                 <option value="">Select Data</option>
                 @foreach($truck as $trucks)
@@ -21,7 +21,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="offset-md-3 offset-lg-0 offset-xl-0 offset-sm-0 offset-xs-0" id='btn'>
+        <div class="col-xs-12 mt-2" id='btn'>
             <input type="submit" class="btn bt-ref" id="btnsearch" value="Search" style="margin-left:15px;" />
         </div>
     </div>

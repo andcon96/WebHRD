@@ -113,9 +113,9 @@
         @endforeach
         cols += '</select>';
         cols += '</td>';
-        cols += '<td data-title="UM" data-label="Type"><input type="text" class="form-control um" autocomplete="off" name="um[]" style="height:37px" min="1" step="1" required readonly/></td>';
+        cols += '<td data-title="UM" data-label="UM"><input type="text" class="form-control um" autocomplete="off" name="um[]" style="height:37px" min="1" step="1" required readonly/></td>';
 
-        cols += '<td data-title="Qty Order" data-label="Jumlah"><input type="number" class="form-control" autocomplete="off" name="qtyord[]" style="height:37px" required min="1"/></td>';
+        cols += '<td data-title="Qty Order" data-label="Qty Order"><input type="number" class="form-control" autocomplete="off" name="qtyord[]" style="height:37px" required min="1"/></td>';
         
         cols += '<td data-title="Action"><input type="button" class="ibtnDel btn btn-danger btn-focus"  value="Delete"></td>';
         cols += '</tr>'
@@ -162,20 +162,20 @@
         document.getElementById('btnloading').style.display = '';
     });
 
-    $("table.addtable").on("click", ".ibtnDel", function(event) {
+    $("table#createTable").on("click", ".ibtnDel", function(event) {
         var row = $(this).closest("tr");
         var line = row.find(".line").val();
-
+        
         if (line == counter - 1) {
             counter -= 1
         }
         
         $(this).closest("tr").remove();
 
-        if(colCount == 2){
-          // Row table kosong. sisa header & footer
-          counter = 1;
-        }
+        // if(colCount == 2){
+        //   // Row table kosong. sisa header & footer
+        //   counter = 1;
+        // }
     });
 </script>
 @endsection

@@ -1,5 +1,5 @@
 <div class="table-responsive col-lg-12 col-md-12 mt-3">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>Sales Order</th>
@@ -16,15 +16,15 @@
         <tbody>
             @forelse ($data as $key => $datas)
                 <tr>
-                    <td>{{$datas->getMaster->so_nbr}}</td>
-                    <td>{{$datas->getMaster->so_cust}}</td>
-                    <td>{{$datas->getMaster->so_type}}</td>
-                    <td>{{$datas->getMaster->so_ship_to}}</td>
-                    <td>{{$datas->getMaster->so_due_date}}</td>
-                    <td>{{$datas->sos_sangu}}</td>
-                    <td>{{$datas->sos_tot_trip}}</td>
-                    <td>{{$datas->countLaporanHist->count()}}</td>
-                    <td>{{$datas->countLaporanHist->whereNotNull('soh_sj')->count() > 0 ? 'Yes' : 'No'}}</td>
+                    <td data-label="SO Number">{{$datas->getMaster->so_nbr}}</td>
+                    <td data-label="SO Customer">{{$datas->getMaster->so_cust}}</td>
+                    <td data-label="SO Type">{{$datas->getMaster->so_type}}</td>
+                    <td data-label="SO Ship To">{{$datas->getMaster->so_ship_to}}</td>
+                    <td data-label="SO Due Date">{{$datas->getMaster->so_due_date}}</td>
+                    <td data-label="Total Sangu">{{$datas->sos_sangu}}</td>
+                    <td data-label="Total Trip">{{$datas->sos_tot_trip}}</td>
+                    <td data-label="Trip Dilaporkan">{{$datas->countLaporanHist->count()}}</td>
+                    <td data-label="Surat Jalan">{{$datas->countLaporanHist->whereNotNull('soh_sj')->count() > 0 ? 'Yes' : 'No'}}</td>
                 </tr>
             @empty
             <tr>

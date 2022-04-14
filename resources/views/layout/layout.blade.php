@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="{{url('assets/css/select2.min.css')}}">
   <!-- <link rel="stylesheet" href="{{url('assets/css/style.css')}}"> -->
   <link rel="stylesheet" href="{{url('assets/css/tablestyle.css')}}">
+  <link rel="stylesheet" href="{{url('assets/css/tablemobile.css')}}">
   <link rel="stylesheet" href="{{url('assets/css/checkbox.css')}}">
   <link rel="stylesheet" href="{{url('assets/css/jquery-ui.css')}}">
 
@@ -456,7 +457,15 @@
     });
 
     /** add active class and stay opened when selected */
-    var url = window.location;
+    var url = window.location.href;
+
+    if(url.includes("?")){
+      url = url.split('?')[0];
+    }else if (url.split("/").length > 4) {
+      let pecah = url.split('/');
+      url = pecah[0] + '/' + pecah[1] + '/' + pecah[2] + '/' + pecah[3];
+      console.log(pecah);
+    }
 
     // for sidebar menu entirely but not cover treeview
     $('ul.nav-sidebar a').filter(function() {

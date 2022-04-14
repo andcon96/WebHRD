@@ -1,5 +1,5 @@
 <div class="table-responsive col-lg-12 col-md-12 mt-3">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>Nomor SO</th>
@@ -15,13 +15,13 @@
         <tbody>
             @forelse ($data as $key => $datas)
             <tr>
-                <td>{{$datas->so_nbr}}</td>
-                <td>{{$datas->so_cust}}</td>
-                <td>{{$datas->so_type}}</td>
-                <td>{{$datas->so_ship_from}}</td>
-                <td>{{$datas->so_ship_to}}</td>
-                <td>{{$datas->so_due_date}}</td>
-                <td>{{$datas->so_status}}</td>
+                <td data-label="SO NUMBER">{{$datas->so_nbr}}</td>
+                <td data-label="SO CUSTOMER">{{$datas->so_cust}}</td>
+                <td data-label="SO TYPE">{{$datas->so_type}}</td>
+                <td data-label="SO SHIP FROM">{{$datas->so_ship_from}}</td>
+                <td data-label="SO SHIP TO">{{$datas->so_ship_to}}</td>
+                <td data-label="SO DUE DATE">{{$datas->so_due_date}}</td>
+                <td data-label="SO STATUS">{{$datas->so_status}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
                         data-cust="{{$datas->so_cust}}" data-type="{{$datas->so_type}}" 

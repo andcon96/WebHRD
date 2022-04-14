@@ -1,5 +1,5 @@
 <div class="table-responsive col-lg-12 col-md-12 mt-3">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>Nomor SO</th>
@@ -16,13 +16,13 @@
             @forelse ($data as $key => $datas)
             @php($totalsangu += $datas->sos_sangu)
             <tr>
-                <td>{{$datas->getMaster->so_nbr}}</td>
-                <td>{{$datas->getMaster->so_cust}}</td>
-                <td>{{number_format($datas->sos_sangu,0)}}</td>
-                <td>{{$datas->getMaster->so_ship_to}}</td>
-                <td>{{$datas->so_status}}</td>
-                <td>{{$datas->getMaster->so_due_date}}</td>
-                <td>
+                <td data-label="SO Number">{{$datas->getMaster->so_nbr}}</td>
+                <td data-label="SO Customer">{{$datas->getMaster->so_cust}}</td>
+                <td data-label="Total Sangu">{{number_format($datas->sos_sangu,0)}}</td>
+                <td data-label="SO Ship To">{{$datas->getMaster->so_ship_to}}</td>
+                <td data-label="SO Status">{{$datas->so_status}}</td>
+                <td data-label="SO Due Date">{{$datas->getMaster->so_due_date}}</td>
+                <td data-label="Action">
                     <a href="{{route('laportrip.edit',$datas->getMaster->id) }}">
                         @if($datas->so_status == 'Open')
                         <i class="fas fa-sticky-note"></i>

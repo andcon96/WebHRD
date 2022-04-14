@@ -9,6 +9,7 @@ use App\Models\Master\Prefix;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SalesOrderDetail;
 use App\Services\CreateTempTable;
+use App\Services\QxtendServices;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -70,10 +71,24 @@ class SalesOrderController extends Controller
         // dd($request->all());
         DB::beginTransaction();
         try{
+            $lockprefix = Prefix::first()->lockForUpdate();
+
             $getrn = (new CreateTempTable())->getrnso();
             if($getrn === false){
                 alert()->error('Error', 'Failed to create SO');
                 DB::rollBack();
+                return back();
+            }
+
+            $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
+            if($sendSO === false){
+                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.');
+                return back();
+            }elseif($sendSO == 'nourl'){
+                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.');
+                return back();
+            }elseif($sendSO[0] == 'error'){
+                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend');
                 return back();
             }
             

@@ -41,10 +41,20 @@
                 <input id="type" type="text" class="form-control" name="type" value="{{$data->so_type}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
+        <div class="mobileonly">
+            <div class="form-group ml-4">
+                <label class="col-form-label text-md-right"><h4>Detail SO</h4></label>
+            </div>
+        </div>
         <div class="form-group row col-md-12">
             @include('transaksi.sangu.show-table')
         </div>
-        <div class="form-group row offset-md-3 col-md-6">
+        <div class="mobileonly">
+            <div class="form-group ml-4">
+                <label class="col-form-label text-md-right"><h4>Driver & Sangu</h4></label>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
             @include('transaksi.sangu.show-driver-table')
         </div>
         <div class="form-group row col-md-12">
@@ -55,16 +65,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-<script>
-     $(document).ready(function() {
-        var data = document.getElementById('sangu').value;
-
-        var newdata = data.replace(/,/g, '');
-
-        document.getElementById('sangu').value = Number(newdata).toLocaleString('en-US');
-    });
-</script>
 @endsection

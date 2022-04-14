@@ -15,11 +15,11 @@
 
     <div class="form-group row col-md-12">
         <label for="s_sonumber" class="col-md-2 col-form-label text-md-right">{{ __('SO Number.') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
             <input id="s_sonumber" type="text" class="form-control" name="s_sonumber" value="{{ request()->input('s_sonumber') }}" autofocus autocomplete="off">
         </div>
         <label for="s_customer" class="col-md-2 col-form-label text-md-right">{{ __('Customer') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
             <select id="s_customer" class="form-control" name="s_customer" autofocus autocomplete="off">
                 <option value=""> Select Data </option>
                 @foreach($cust as $custs)
@@ -31,19 +31,19 @@
 
     <div class="form-group row col-md-12">
         <label for="s_shipfrom" class="col-md-2 col-form-label text-md-right">{{ __('Ship From') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
             <input id="s_shipfrom" type="text" class="form-control" name="s_shipfrom" autofocus autocomplete="off">
         </div>
 
         <label for="s_shipto" class="col-md-2 col-form-label text-md-right">{{ __('Ship To') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
             <input id="s_shipto" type="text" class="form-control" name="s_shipto" autofocus autocomplete="off">
         </div>
     </div>
 
     <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('Status') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
             <select id="s_status" class="form-control" name="s_status" autofocus autocomplete="off">
                 <option value=""> --Select Status-- </option>
                 <option value="New">New</option>
@@ -53,7 +53,7 @@
             </select>
         </div>
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
             <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
             <button class="btn bt-action newUser" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i class="fa fa-sync"></i></button>
         </div>

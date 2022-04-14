@@ -18,11 +18,11 @@
 
     <div class="form-group row col-md-12">
         <label for="s_krnbr" class="col-md-2 col-form-label text-md-right">{{ __('Kerusakan Nbr.') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
             <input id="s_krnbr" type="text" class="form-control" name="s_krnbr" value="{{ request()->input('s_krnbr') }}" autofocus autocomplete="off">
         </div>
         <label for="s_driver" class="col-md-2 col-form-label text-md-right">{{ __('No Polis') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
             <select id="s_driver" class="form-control" name="s_driver" autofocus autocomplete="off">
                 <option value=""> Select Data </option>
                 @foreach($truck as $trucks)
@@ -33,7 +33,7 @@
     </div>
     <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
             <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
             <button class="btn bt-action newUser" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i class="fa fa-sync"></i></button>
         </div>

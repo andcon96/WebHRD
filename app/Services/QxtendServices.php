@@ -198,102 +198,101 @@ class QxtendServices
     $qxUrl          = $qxtend->qx_url;
     $timeout        = 0;
 
-    $qdocHead =
-      '<?xml version="1.0" encoding="UTF-8"?>
-<soapenv:Envelope xmlns="urn:schemas-qad-com:xml-services"
-  xmlns:qcom="urn:schemas-qad-com:xml-services:common"
-  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
-  <soapenv:Header>
-    <wsa:Action/>
-    <wsa:To>urn:services-qad-com:QX_DNP</wsa:To>
-    <wsa:MessageID>urn:services-qad-com::QX_DNP</wsa:MessageID>
-    <wsa:ReferenceParameters>
-      <qcom:suppressResponseDetail>true</qcom:suppressResponseDetail>
-    </wsa:ReferenceParameters>
-    <wsa:ReplyTo>
-      <wsa:Address>urn:services-qad-com:</wsa:Address>
-    </wsa:ReplyTo>
-  </soapenv:Header>
-  <soapenv:Body>
-    <receivePurchaseOrder>
-      <qcom:dsSessionContext>
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>domain</qcom:propertyName>
-          <qcom:propertyValue/>
-        </qcom:ttContext>
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>scopeTransaction</qcom:propertyName>
-          <qcom:propertyValue>false</qcom:propertyValue>
-        </qcom:ttContext>
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>version</qcom:propertyName>
-          <qcom:propertyValue>eB_2</qcom:propertyValue>
-        </qcom:ttContext>
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>mnemonicsRaw</qcom:propertyName>
-          <qcom:propertyValue>false</qcom:propertyValue>
-        </qcom:ttContext>
-        
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>username</qcom:propertyName>
-          <qcom:propertyValue>mfg</qcom:propertyValue>
-        </qcom:ttContext>
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>password</qcom:propertyName>
-          <qcom:propertyValue/>
-        </qcom:ttContext>
-       
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>action</qcom:propertyName>
-          <qcom:propertyValue/>
-        </qcom:ttContext>
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>entity</qcom:propertyName>
-          <qcom:propertyValue/>
-        </qcom:ttContext>
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>email</qcom:propertyName>
-          <qcom:propertyValue/>
-        </qcom:ttContext>
-        <qcom:ttContext>
-          <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
-          <qcom:propertyName>emailLevel</qcom:propertyName>
-          <qcom:propertyValue/>
-        </qcom:ttContext>
-      </qcom:dsSessionContext>';
+    $qdocHead = '<?xml version="1.0" encoding="UTF-8"?>
+    <soapenv:Envelope xmlns="urn:schemas-qad-com:xml-services"
+      xmlns:qcom="urn:schemas-qad-com:xml-services:common"
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <soapenv:Header>
+        <wsa:Action/>
+        <wsa:To>urn:services-qad-com:QX_DNP</wsa:To>
+        <wsa:MessageID>urn:services-qad-com::QX_DNP</wsa:MessageID>
+        <wsa:ReferenceParameters>
+          <qcom:suppressResponseDetail>true</qcom:suppressResponseDetail>
+        </wsa:ReferenceParameters>
+        <wsa:ReplyTo>
+          <wsa:Address>urn:services-qad-com:</wsa:Address>
+        </wsa:ReplyTo>
+      </soapenv:Header>
+      <soapenv:Body>
+        <receivePurchaseOrder>
+          <qcom:dsSessionContext>
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>domain</qcom:propertyName>
+              <qcom:propertyValue/>
+            </qcom:ttContext>
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>scopeTransaction</qcom:propertyName>
+              <qcom:propertyValue>false</qcom:propertyValue>
+            </qcom:ttContext>
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>version</qcom:propertyName>
+              <qcom:propertyValue>eB_2</qcom:propertyValue>
+            </qcom:ttContext>
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>mnemonicsRaw</qcom:propertyName>
+              <qcom:propertyValue>false</qcom:propertyValue>
+            </qcom:ttContext>
+            
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>username</qcom:propertyName>
+              <qcom:propertyValue>mfg</qcom:propertyValue>
+            </qcom:ttContext>
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>password</qcom:propertyName>
+              <qcom:propertyValue/>
+            </qcom:ttContext>
+          
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>action</qcom:propertyName>
+              <qcom:propertyValue/>
+            </qcom:ttContext>
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>entity</qcom:propertyName>
+              <qcom:propertyValue/>
+            </qcom:ttContext>
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>email</qcom:propertyName>
+              <qcom:propertyValue/>
+            </qcom:ttContext>
+            <qcom:ttContext>
+              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+              <qcom:propertyName>emailLevel</qcom:propertyName>
+              <qcom:propertyValue/>
+            </qcom:ttContext>
+          </qcom:dsSessionContext>';
 
     $qdocBody =
       '<dsPurchaseOrderReceive>
-        <purchaseOrderReceive>
-        <ordernum>' . $surat_jalan[0]->getPOMaster->pom_nbr . '</ordernum>';
+            <purchaseOrderReceive>
+            <ordernum>' . $surat_jalan[0]->getPOMaster->pom_nbr . '</ordernum>';
 
     foreach ($surat_jalan as $sj) {
       $qdocBody .=
         '<lineDetail>
-            <line>' . $sj->sj_line . '</line>
-            <lotserialQty>' . $sj->sj_qty_rcvd . '</lotserialQty>
-            <site>' . $site . '</site>
-            <location>' . $sj->sj_loc . '</location>
-            <lotserial>' . $sj->sj_lot . '</lotserial>
-            <lotref>' . $sj->sj_ref . '</lotref>
-          </lineDetail>';
+                <line>' . $sj->sj_line . '</line>
+                <lotserialQty>' . $sj->sj_qty_rcvd . '</lotserialQty>
+                <site>' . $site . '</site>
+                <location>' . $sj->sj_loc . '</location>
+                <lotserial>' . $sj->sj_lot . '</lotserial>
+                <lotref>' . $sj->sj_ref . '</lotref>
+              </lineDetail>';
     }
 
     $qdocFoot =
       '</purchaseOrderReceive>
-      </dsPurchaseOrderReceive>
-    </receivePurchaseOrder>
-  </soapenv:Body>
-</soapenv:Envelope>';
+          </dsPurchaseOrderReceive>
+        </receivePurchaseOrder>
+      </soapenv:Body>
+    </soapenv:Envelope>';
 
     $qdocRequest = $qdocHead . $qdocBody . $qdocFoot;
 
@@ -347,6 +346,169 @@ class QxtendServices
       return true;
     } else {
       return false;
+    }
+  }
+
+  public function qxSOMaintenance($data, $sonbr)
+  {
+    $qxwsa = Qxwsa::firstOrFail();
+    if (is_null($qxwsa->qx_url)) {
+      return 'nourl';
+    }
+    // Var Qxtend
+    $qxUrl          = $qxwsa->qx_url;
+
+    $timeout        = 0;
+
+    // XML Qextend
+    $qdocHead = '<?xml version="1.0" encoding="UTF-8"?>
+                    <soapenv:Envelope xmlns="urn:schemas-qad-com:xml-services"
+                      xmlns:qcom="urn:schemas-qad-com:xml-services:common"
+                      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+                      <soapenv:Header>
+                        <wsa:Action/>
+                        <wsa:To>urn:services-qad-com:QX_DNP</wsa:To>
+                        <wsa:MessageID>urn:services-qad-com::QX_DNP</wsa:MessageID>
+                        <wsa:ReferenceParameters>
+                          <qcom:suppressResponseDetail>false</qcom:suppressResponseDetail>
+                        </wsa:ReferenceParameters>
+                        <wsa:ReplyTo>
+                          <wsa:Address>urn:services-qad-com:</wsa:Address>
+                        </wsa:ReplyTo>
+                      </soapenv:Header>
+                      <soapenv:Body>
+                        <maintainSalesOrder>
+                          <qcom:dsSessionContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>domain</qcom:propertyName>
+                              <qcom:propertyValue>'.$qxwsa->wsas_domain.'</qcom:propertyValue>
+                            </qcom:ttContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>scopeTransaction</qcom:propertyName>
+                              <qcom:propertyValue>true</qcom:propertyValue>
+                            </qcom:ttContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>version</qcom:propertyName>
+                              <qcom:propertyValue>ERP3_2</qcom:propertyValue>
+                            </qcom:ttContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>mnemonicsRaw</qcom:propertyName>
+                              <qcom:propertyValue>false</qcom:propertyValue>
+                            </qcom:ttContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>username</qcom:propertyName>
+                              <qcom:propertyValue>mfg</qcom:propertyValue>
+                            </qcom:ttContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>password</qcom:propertyName>
+                              <qcom:propertyValue></qcom:propertyValue>
+                            </qcom:ttContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>action</qcom:propertyName>
+                              <qcom:propertyValue/>
+                            </qcom:ttContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>entity</qcom:propertyName>
+                              <qcom:propertyValue/>
+                            </qcom:ttContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>email</qcom:propertyName>
+                              <qcom:propertyValue/>
+                            </qcom:ttContext>
+                            <qcom:ttContext>
+                              <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
+                              <qcom:propertyName>emailLevel</qcom:propertyName>
+                              <qcom:propertyValue/>
+                            </qcom:ttContext>
+                          </qcom:dsSessionContext>';
+
+    $qdocbody = '<dsSalesOrder>
+                    <salesOrder>
+                        <soNbr>' . $sonbr . '</soNbr>
+                        <soCust>' . $data['customer'] . '</soCust>
+                        <soShip>' . $data['shipto'] . '</soShip>
+                        <soOrdDate>' . Carbon::now()->toDateString() . '</soOrdDate>
+                        <soDueDate>' . $data['duedate'] . '</soDueDate>
+                        <soDetailAll>true</soDetailAll>';
+
+                foreach ($data['operation'] as $key => $datas) {
+                  $qdocbody .=    '<salesOrderDetail>' .
+                    '<line>' . $data['line'][$key] . '</line>' .
+                    '<sodPart>' . $data['part'][$key] . '</sodPart>' .
+                    '<sodQtyOrd>' . $data['qtyord'][$key] . '</sodQtyOrd>' .
+                    '<sodQtyAll>' . $data['qtyord'][$key] . '</sodQtyAll>' .                          
+                    '</salesOrderDetail>';
+                }
+
+    $qdocbody .=   '</salesOrder>
+                                        </dsSalesOrder>';
+
+    $qdocfoot = '</maintainSalesOrder>
+                    </soapenv:Body>
+                 </soapenv:Envelope>';
+
+    $qdocRequest = $qdocHead . $qdocbody . $qdocfoot;
+
+    $curlOptions = array(
+      CURLOPT_URL => $qxUrl,
+      CURLOPT_CONNECTTIMEOUT => $timeout,        // in seconds, 0 = unlimited / wait indefinitely.
+      CURLOPT_TIMEOUT => $timeout + 120, // The maximum number of seconds to allow cURL functions to execute. must be greater than CURLOPT_CONNECTTIMEOUT
+      CURLOPT_HTTPHEADER => $this->httpHeader($qdocRequest),
+      CURLOPT_POSTFIELDS => preg_replace("/\s+/", " ", $qdocRequest),
+      CURLOPT_POST => true,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_SSL_VERIFYPEER => false,
+      CURLOPT_SSL_VERIFYHOST => false
+    );
+
+    $getInfo = '';
+    $httpCode = 0;
+    $curlErrno = 0;
+    $curlError = '';
+
+
+    $qdocResponse = '';
+
+    $curl = curl_init();
+    if ($curl) {
+      curl_setopt_array($curl, $curlOptions);
+      $qdocResponse = curl_exec($curl);           // sending qdocRequest here, the result is qdocResponse.
+      //
+      $curlErrno = curl_errno($curl);
+      $curlError = curl_error($curl);
+      $first = true;
+      foreach (curl_getinfo($curl) as $key => $value) {
+        if (gettype($value) != 'array') {
+          if (!$first) $getInfo .= ", ";
+          $getInfo = $getInfo . $key . '=>' . $value;
+          $first = false;
+          if ($key == 'http_code') $httpCode = $value;
+        }
+      }
+      curl_close($curl);
+    }
+
+    if (is_bool($qdocResponse)) {
+      return false;
+    }
+    $xmlResp = simplexml_load_string($qdocResponse);
+
+    $xmlResp->registerXPathNamespace('ns1', 'urn:schemas-qad-com:xml-services');
+    $qdocResult = (string) $xmlResp->xpath('//ns1:result')[0];
+
+    if ($qdocResult == "success" or $qdocResult == "warning") {
+      return [$qdocResult, $qdocResponse];
+    } else {
+      return [$qdocResult, $qdocResponse];
     }
   }
 }

@@ -77,13 +77,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware'=>'can:access_lapor_sj'], function(){
         Route::resource('laporsj', SuratJalanLaporMTController::class);
         Route::get('laporsj/{so}/{truck}', [SuratJalanLaporMTController::class, 'laporsj'])->name('LaporSJ');
-        Route::post('updatesj', [SuratJalanLaporMTController::class, 'updatesj'])->name('updateSJ');
+        Route::post('laporsj/updatesj', [SuratJalanLaporMTController::class, 'updatesj'])->name('updateSJ');
     });
 
     Route::group(['middleware'=>'can:access_lapor_kerusakan'], function(){
         Route::resource('laporkerusakan', KerusakanLaporMTController::class);
-        Route::get('assignkr/{id}', [KerusakanLaporMTController::class, 'assignkr'])->name('assignKR');
-        Route::put('upassignkr/{id}', [KerusakanLaporMTController::class, 'upassignkr'])->name('UpAssignKR');
+        Route::get('laporkerusakan/assignkr/{id}', [KerusakanLaporMTController::class, 'assignkr'])->name('assignKR');
+        Route::put('laporkerusakan/upassignkr/{id}', [KerusakanLaporMTController::class, 'upassignkr'])->name('UpAssignKR');
     });
 
     Route::group(['middleware'=>'can:access_check_in_out'], function(){

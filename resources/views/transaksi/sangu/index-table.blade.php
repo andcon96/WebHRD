@@ -1,5 +1,5 @@
 <div class="table-responsive col-lg-12 col-md-12 mt-3">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>Nomor SO</th>
@@ -15,13 +15,13 @@
         <tbody>
             @forelse ($data as $key => $datas)
             <tr>
-                <td>{{$datas->so_nbr}}</td>
-                <td>{{$datas->so_cust}}</td>
-                <td>{{$datas->so_type}}</td>
-                <td>{{$datas->so_ship_from}}</td>
-                <td>{{$datas->so_ship_to}}</td>
-                <td>{{$datas->so_due_date}}</td>
-                <td>{{$datas->so_status}}</td>
+                <td data-label="SO Number">{{$datas->so_nbr}}</td>
+                <td data-label="SO Customer">{{$datas->so_cust}}</td>
+                <td data-label="SO Type">{{$datas->so_type}}</td>
+                <td data-label="SO Ship From">{{$datas->so_ship_from}}</td>
+                <td data-label="SO Ship To">{{$datas->so_ship_to}}</td>
+                <td data-label="SO Due Date">{{$datas->so_due_date}}</td>
+                <td data-label="SO Status">{{$datas->so_status}}</td>
                 <td>
                     <a href="{{route('sosangu.show',$datas->id) }}"><i class="fas fa-eye"></i></a>
                     @if($datas->so_status == 'New' || $datas->so_status == 'Open')

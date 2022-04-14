@@ -1,5 +1,5 @@
 <div class="table-responsive offset-lg-3 col-lg-6 col-md-12 mt-3">
-    <table class="table table-bordered edittable" id="editTable" width="100%" cellspacing="0">
+    <table class="table table-bordered edittable mini-table" id="editTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th width="30%">Trip Ke</th>
@@ -15,7 +15,7 @@
             @forelse ($sohbyso as $key => $datas)
             @if($datas->soh_driver != $driver && $driver != '')
             <tr>
-                <td colspan="3" style="text-align: right;"><b>{{$ongoingtrip}} / {{$totaltrip}}</b></td>
+                <td colspan="3" style="text-align: right;" data-label="Total Trip"><b>{{$ongoingtrip}} / {{$totaltrip}}</b></td>
             </tr>
             @endif
             @if($datas->soh_driver != $driver)
@@ -28,8 +28,8 @@
 
             <tr>
                 <td>Trip ke {{$trip}}</td>
-                <td>{{$datas->getTruckDriver->getTruck->truck_no_polis}} -- {{$datas->getTruckDriver->getUser->name}}</td>
-                <td>{{$datas->tglhist}}</td>
+                <td data-label="No Polis & Driver">{{$datas->getTruckDriver->getTruck->truck_no_polis}} -- {{$datas->getTruckDriver->getUser->name}}</td>
+                <td data-label="Waktu Pencatatan">{{$datas->tglhist}}</td>
             </tr>
 
             @php($trip += 1)

@@ -1,5 +1,5 @@
 <div class="table-responsive offset-lg-1 col-lg-10 col-md-12 mt-3">
-    <table class="table table-bordered edittable" id="editTable" width="100%" cellspacing="0">
+    <table class="table table-bordered edittable mini-table" id="editTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th width="10%">Line</th>
@@ -15,15 +15,15 @@
             <tr>
                 <input type="hidden" name="operation[]" class="operation" value="M">
                 <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
-                <td><input type="number" class="form-control" value="{{$datas->sod_line}}" name="line[]" readonly></td>
-                <td>
+                <td data-label="Line"><input type="number" class="form-control" value="{{$datas->sod_line}}" name="line[]" readonly></td>
+                <td data-label="Item Part">
                     <input type="hidden" value="{{$datas->sod_part}}" name="part[]">
                     <input type="text" class="form-control" value="{{$datas->sod_part}} - {{$datas->getItem->item_desc}}" readonly>
                 </td>
-                <td><input type="text" class="form-control" value="{{$datas->sod_um}}" name="um[]" readonly></td>
-                <td><input type="number" class="form-control" value="{{$datas->sod_qty_ord}}" name="qtyord[]" min="{{$datas->sod_qty_ship}}"></td>
-                <td><input type="number" class="form-control" value="{{$datas->sod_qty_ship}}" name="qtyship[]" readonly></td>
-                <td style="vertical-align:middle;text-align:center;"> 
+                <td data-label="UM"><input type="text" class="form-control" value="{{$datas->sod_um}}" name="um[]" readonly></td>
+                <td data-label="Qty Order"><input type="number" class="form-control" value="{{$datas->sod_qty_ord}}" name="qtyord[]" min="{{$datas->sod_qty_ship}}"></td>
+                <td data-label="Qty Ship"><input type="number" class="form-control" value="{{$datas->sod_qty_ship}}" name="qtyship[]" readonly></td>
+                <td data-label="Delete" style="vertical-align:middle;text-align:center;"> 
                     @if($datas->sod_qty_ship != 0)
                         <input type="checkbox" class="qaddel" value="" disabled> 
                     @else

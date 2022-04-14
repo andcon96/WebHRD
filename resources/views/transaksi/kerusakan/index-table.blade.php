@@ -1,5 +1,5 @@
 <div class="table-responsive col-lg-12 col-md-12 mt-3">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>Nomor Kerusakan</th>
@@ -13,12 +13,12 @@
         <tbody>
             @forelse ($data as $key => $datas)
             <tr>
-                <td>{{$datas->kerusakan_nbr}}</td>
-                <td>{{$datas->getTruckDriver->getTruck->truck_no_polis}}</td>
-                <td>{{$datas->getTruckDriver->getUser->name}}</td>
-                <td>{{$datas->kerusakan_date}}</td>
-                <td>{{$datas->kerusakan_status}}</td>
-                <td>
+                <td data-label="Nomor Kerusakan">{{$datas->kerusakan_nbr}}</td>
+                <td data-label="No Polis">{{$datas->getTruckDriver->getTruck->truck_no_polis}}</td>
+                <td data-label="Driver">{{$datas->getTruckDriver->getUser->name}}</td>
+                <td data-label="Tanggal Lapor">{{$datas->kerusakan_date}}</td>
+                <td data-label="Status">{{$datas->kerusakan_status}}</td>
+                <td data-label="Action">
                     <a href="{{route('laporkerusakan.show',$datas->id) }}"><i class="fas fa-eye"></i></a>
                     @if($datas->kerusakan_status == 'New')
                     <a href="{{route('laporkerusakan.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>

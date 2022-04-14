@@ -44,8 +44,20 @@
                 <input id="type" type="text" class="form-control" name="type" value="{{$data->so_type}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
+        
+        <div class="mobileonly">
+            <div class="form-group ml-4">
+                <label class="col-form-label text-md-right"><h4>Detail SO</h4></label>
+            </div>
+        </div>
         <div class="form-group row col-md-12">
             @include('transaksi.sangu.edit-table')
+        </div>
+        
+        <div class="mobileonly">
+            <div class="form-group ml-4">
+                <label class="col-form-label text-md-right"><h4>Driver & Sangu</h4></label>
+            </div>
         </div>
         <div class="form-group row offset-md-2 col-md-8">
             @include('transaksi.sangu.edit-driver-table')
