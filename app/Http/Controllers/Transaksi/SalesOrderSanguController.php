@@ -10,7 +10,9 @@ use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SalesOrderSangu;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class SalesOrderSanguController extends Controller
 {
@@ -34,15 +36,17 @@ class SalesOrderSanguController extends Controller
             $data->where('so_status',$request->s_status);
         }
 
+        $data->where('so_domain',Session::get('domain'));
+
         $data = $data->with('getDetail')->orderBy('created_at','DESC')->paginate(10);
 
         return view('transaksi.sangu.index',compact('data','cust'));
     }
 
     public function show(Request $request, $id){
-        
         $data = SalesOrderMstr::with(['getDetail','getSangu.getTruckDriver.getUser'])->findOrFail($id);
-        // dd($data->getSangu[0]->getTruck);
+        
+        $this->authorize('view', [SalesOrderMstr::class, $data]);
         
         return view('transaksi.sangu.show',compact('data'));
     }
@@ -50,6 +54,9 @@ class SalesOrderSanguController extends Controller
     public function edit(SalesOrderSangu $salesOrderSangu, $id)
     {
         $data = SalesOrderMstr::with(['getDetail','getSangu'])->where('id',$id)->firstOrFail();
+
+        $this->authorize('update',[SalesOrderMstr::class, $data]);
+        
         $truck = TruckDriver::with(['getUser'])->where('truck_is_active',1)->orderBy('truck_no_polis','ASC')->get();
 
         return view('transaksi.sangu.edit',compact('data','truck'));
@@ -77,11 +84,11 @@ class SalesOrderSanguController extends Controller
             $so_mstr->save();
 
             DB::commit();
-            alert()->success('Success', 'Alokasi Sangu Created');
+            alert()->success('Success', 'Alokasi Sangu Created')->persistent('Dismiss');
             return back();
         }catch(Exception $e){
             DB::rollback();
-            alert()->error('Error', 'Failed to create Alokasi Sangu');
+            alert()->error('Error', 'Failed to create Alokasi Sangu')->persistent('Dismiss');
             return back();
         }
         

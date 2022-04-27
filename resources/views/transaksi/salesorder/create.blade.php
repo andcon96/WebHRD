@@ -3,7 +3,7 @@
 @section('menu_name','Sales Order Maintenance')
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
-    <li class="breadcrumb-item"><a href="{{url('/')}}">Master</a></li>
+    <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
     <li class="breadcrumb-item active">Sales Order Maintenance</li>
 </ol>
 @endsection
@@ -47,6 +47,10 @@
             <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
             <div class="col-md-3">
                 <input id="duedate" type="text" class="form-control" name="duedate" value="" autocomplete="off" maxlength="24" required autofocus>
+            </div>
+            <label for="domain" class="col-md-3 col-form-label text-md-right">Domain</label>
+            <div class="col-md-3">
+                <input id="domains" type="text" class="form-control" name="domains" value="{{Session::get('domain')}}" autocomplete="off" maxlength="24" required readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">

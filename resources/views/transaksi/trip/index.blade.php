@@ -10,7 +10,7 @@
 
 @section('content')
 
-<form action="" method="GET">
+<form action="" method="GET" class="col-md-12">
     <div class="form-group row">
         <label for="polis" class="col-form-label text-md-right mt-2" style="margin-left:25px">{{ __('Truck') }}</label>
         <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12 mt-2">

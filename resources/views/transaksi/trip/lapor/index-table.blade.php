@@ -1,5 +1,5 @@
 <div class="table-responsive col-lg-12 col-md-12 mt-3">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>Nomor SO</th>
@@ -16,13 +16,13 @@
             @forelse ($data as $key => $datas)
             @php($totalsangu += $datas->getSangu[0]->sos_sangu)
             <tr>
-                <td>{{$datas->so_nbr}}</td>
-                <td>{{$datas->so_cust}}</td>
-                <td>{{number_format($datas->getSangu[0]->sos_sangu,0)}}</td>
-                <td>{{$datas->so_ship_to}}</td>
-                <td>{{$datas->so_status}}</td>
-                <td>{{$datas->so_due_date}}</td>
-                <td>
+                <td data-label="SO Nbr">{{$datas->so_nbr}}</td>
+                <td data-label="Customer">{{$datas->so_cust}}</td>
+                <td data-label="Sangu">{{number_format($datas->getSangu[0]->sos_sangu,0)}}</td>
+                <td data-label="Ship To">{{$datas->so_ship_to}}</td>
+                <td data-label="Status">{{$datas->so_status}}</td>
+                <td data-label="Due Date">{{$datas->so_due_date}}</td>
+                <td data-label="Action">
                     <a href="{{route('laportrip.edit',$datas->id) }}">
                         <i class="fas fa-sticky-note"></i>
                     </a>

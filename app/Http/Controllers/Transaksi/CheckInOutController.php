@@ -58,11 +58,11 @@ class CheckInOutController extends Controller
             $datacheck->save();
 
             DB::commit();
-            alert()->success('Success', 'Check IN / OUT Saved');
+            alert()->success('Success', 'Check IN / OUT Saved')->persistent('Dismiss');
             return back();
         }catch(Exception $e){
             DB::rollBack();
-            alert()->error('Error', 'Failed to Check IN / OUT');
+            alert()->error('Error', 'Failed to Check IN / OUT')->persistent('Dismiss');
             return back();
         }
     }

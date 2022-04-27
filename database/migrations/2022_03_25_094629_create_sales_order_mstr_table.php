@@ -21,6 +21,7 @@ class CreateSalesOrderMstrTable extends Migration
             $table->string('so_ship_from',8);
             $table->string('so_ship_to',8);
             $table->date('so_due_date');
+            $table->string('so_domain',8);
             $table->enum('so_status',['New','Open','Closed','Cancelled','Selesai']);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

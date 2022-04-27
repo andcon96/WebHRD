@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Models\Master\Domain;
 use App\Models\Master\Prefix;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
 
 class CreateTempTable
 {
@@ -41,17 +43,18 @@ class CreateTempTable
 
     public function getrnso(){
         try{
-            $prefix = Prefix::firstOrFail();
+            // $prefix = Prefix::firstOrFail();
+            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
             
-            $cektahun = substr($prefix->rn_so,0,2);
+            $cektahun = substr($prefix->domain_so_rn,0,2);
             $yearnow = date('y');
             
             if($cektahun != $yearnow){
                 $rn_new = $yearnow.'0001';
             }else{
-                $rn_new = $prefix->rn_so + 1;
+                $rn_new = $prefix->domain_so_rn + 1;
             }
-            $newprefix = $prefix->prefix_so.$rn_new;
+            $newprefix = $prefix->domain_so_prefix.$rn_new;
     
             return $newprefix;
         }catch(Exception $e){
@@ -61,17 +64,18 @@ class CreateTempTable
 
     public function getrnkerusakan(){
         try{
-            $prefix = Prefix::firstOrFail();
+            // $prefix = Prefix::firstOrFail();
+            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
             
-            $cektahun = substr($prefix->rn_kerusakan,0,2);
+            $cektahun = substr($prefix->domain_kr_rn,0,2);
             $yearnow = date('y');
             
             if($cektahun != $yearnow){
                 $rn_new = $yearnow.'0001';
             }else{
-                $rn_new = $prefix->rn_kerusakan + 1;
+                $rn_new = $prefix->domain_kr_rn + 1;
             }
-            $newprefix = $prefix->prefix_kerusakan.$rn_new;
+            $newprefix = $prefix->domain_kr_prefix.$rn_new;
     
             return $newprefix;
         }catch(Exception $e){

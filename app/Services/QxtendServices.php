@@ -382,7 +382,7 @@ class QxtendServices
                             <qcom:ttContext>
                               <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
                               <qcom:propertyName>domain</qcom:propertyName>
-                              <qcom:propertyValue>'.$qxwsa->wsas_domain.'</qcom:propertyValue>
+                              <qcom:propertyValue>'.$data['domains'].'</qcom:propertyValue>
                             </qcom:ttContext>
                             <qcom:ttContext>
                               <qcom:propertyQualifier>QAD</qcom:propertyQualifier>

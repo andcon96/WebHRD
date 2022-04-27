@@ -89,7 +89,7 @@ class TripLaporMTController extends Controller
                 ->count();
 
             if ($OnGoingAbsen >= $targetAbsen) {
-                alert()->error('Error', 'Target Absensi Sudah Tercapai, Data tidak disimpan');
+                alert()->error('Error', 'Target Absensi Sudah Tercapai, Data tidak disimpan')->persistent('Dismiss');
                 return back();
             }
 
@@ -114,11 +114,11 @@ class TripLaporMTController extends Controller
             }
 
             DB::commit();
-            alert()->success('Success', 'Absensi Berhasil Disimpan');
+            alert()->success('Success', 'Absensi Berhasil Disimpan')->persistent('Dismiss');
             return back();
         } catch (Exception $e) {
             DB::rollBack();
-            alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi');
+            alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');
             return back();
         }
     }

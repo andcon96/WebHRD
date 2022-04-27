@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Customer;
+use App\Models\Master\Domain;
 use App\Models\Master\Item;
 use App\Models\Master\Prefix;
 use App\Models\Transaksi\SalesOrderMstr;
@@ -13,6 +14,7 @@ use App\Services\QxtendServices;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class SalesOrderController extends Controller
 {
@@ -23,7 +25,6 @@ class SalesOrderController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->all());
         $cust = Customer::get();
         $data = SalesOrderMstr::query();
         if($request->s_sonumber){
@@ -41,6 +42,8 @@ class SalesOrderController extends Controller
         if($request->s_status){
             $data->where('so_status',$request->s_status);
         }
+
+        $data->where('so_domain',Session::get('domain'));
 
 
         $data = $data->with('getDetail')->orderBy('created_at','DESC')->paginate(10);
@@ -68,27 +71,26 @@ class SalesOrderController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         DB::beginTransaction();
         try{
-            $lockprefix = Prefix::first()->lockForUpdate();
+            Prefix::first()->lockForUpdate();
 
             $getrn = (new CreateTempTable())->getrnso();
             if($getrn === false){
-                alert()->error('Error', 'Failed to create SO');
+                alert()->error('Error', 'Failed to create SO')->persistent('Dismiss');
                 DB::rollBack();
                 return back();
             }
 
             $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
             if($sendSO === false){
-                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.');
+                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
                 return back();
             }elseif($sendSO == 'nourl'){
-                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.');
+                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
                 return back();
             }elseif($sendSO[0] == 'error'){
-                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend');
+                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
                 return back();
             }
             
@@ -99,6 +101,7 @@ class SalesOrderController extends Controller
             $so_mstr->so_ship_from = $request->shipfrom;
             $so_mstr->so_ship_to = $request->shipto;
             $so_mstr->so_due_date = $request->duedate;
+            $so_mstr->so_domain = $request->domains;
             $so_mstr->save();
 
             $id = $so_mstr->id;
@@ -113,18 +116,19 @@ class SalesOrderController extends Controller
                 $so_detail->save();
             }
 
-            $prefix = Prefix::firstOrFail();
-            $prefix->rn_so = substr($getrn,2,6);
+            // $prefix = Prefix::firstOrFail();
+            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
+            $prefix->domain_so_rn = substr($getrn,2,6);
             $prefix->save();
 
             DB::commit();
-            alert()->success('Success', 'Sales Order Created');
+            alert()->success('Success', 'Sales Order Created')->persistent('Dismiss');
             return back();
             
 
         }catch(Exception $e){
             DB::rollback();
-            alert()->error('Error', 'Failed to create SO');
+            alert()->error('Error', 'Failed to create SO')->persistent('Dismiss');
             return back();
         }
     }
@@ -132,6 +136,9 @@ class SalesOrderController extends Controller
     public function edit(SalesOrderMstr $salesOrderMstr, $id)
     {
         $data = SalesOrderMstr::with('getDetail.getItem')->findOrFail($id);
+
+        $this->authorize('update',[SalesOrderMstr::class, $data]);
+        
         $item = Item::get();
         return view('transaksi.salesorder.edit',compact('data','item'));
     }
@@ -175,12 +182,12 @@ class SalesOrderController extends Controller
                 }
             }
             DB::commit();
-            alert()->success('Success', 'SO Updated');
+            alert()->success('Success', 'SO Updated')->persistent('Dismiss');
             return back();
 
         }catch(\Exception $e){
             DB::rollBack();
-            alert()->error('Error', 'Failed to update so');
+            alert()->error('Error', 'Failed to update so')->persistent('Dismiss');
             return back();
         }
 
@@ -205,10 +212,10 @@ class SalesOrderController extends Controller
             $truck->save();
 
             DB::commit();
-            alert()->success('Success', 'Sales Order Deleted Successfully');
+            alert()->success('Success', 'Sales Order Deleted Successfully')->persistent('Dismiss');
         }catch (\Exception $err) {
             DB::rollBack();
-            alert()->error('Error', 'Failed to delete Sales Order');
+            alert()->error('Error', 'Failed to delete Sales Order')->persistent('Dismiss');
         }
 
         return redirect()->route('salesorder.index');

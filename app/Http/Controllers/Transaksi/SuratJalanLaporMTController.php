@@ -70,11 +70,11 @@ class SuratJalanLaporMTController extends Controller
             }
 
             DB::commit();
-            alert()->success('Success', 'Surat Jalan Berhasil Disimpan');
+            alert()->success('Success', 'Surat Jalan Berhasil Disimpan')->persistent('Dismiss');
             return back();
         }catch(Exception $e){
             DB::rollback();
-            alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi');
+            alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');
             return back();
         }
 

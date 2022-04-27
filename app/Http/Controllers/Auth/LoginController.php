@@ -69,9 +69,7 @@ class LoginController extends Controller
             // Session::put('menu_flag', $users->xxrole_flag);
             Session::put('supp_code', $users->supp_id);
             Session::put('getRole', $users->getRole->role);
-            Session::put('domain',
-                $users->domain
-            );
+            Session::put('domain',$request->domain);
             Session::put('department', $users->department);
             Session::put('name', $users->name);
 

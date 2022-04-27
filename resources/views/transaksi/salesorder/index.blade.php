@@ -3,7 +3,7 @@
 @section('menu_name','Sales Order Maintenance')
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
-    <li class="breadcrumb-item"><a href="{{url('/')}}">Master</a></li>
+    <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
     <li class="breadcrumb-item active">Sales Order Maintenance</li>
 </ol>
 @endsection

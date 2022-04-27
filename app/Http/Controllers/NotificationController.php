@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -27,5 +28,11 @@ class NotificationController extends Controller
         //DB::table('notifications')->where('id', '=', $req->input('id'))->delete();
 
         return response()->noContent();
+    }
+
+    public function changedomain(Request $req){
+        $req->session()->put('domain',$req->domain);
+
+        return true;
     }
 }

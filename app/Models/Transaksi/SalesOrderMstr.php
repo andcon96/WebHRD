@@ -20,5 +20,4 @@ class SalesOrderMstr extends Model
     {
         return $this->hasMany(SalesOrderSangu::class, 'sos_so_mstr_id');
     }
-
 }

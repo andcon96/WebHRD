@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Master\AccessRoleMenuController;
 use App\Http\Controllers\Master\CustomerController;
 use App\Http\Controllers\Master\DepartmentController;
+use App\Http\Controllers\Master\DomainController;
 use App\Http\Controllers\Master\ItemMTController;
 use App\Http\Controllers\Master\KerusakanController;
 use App\Http\Controllers\Master\PrefixController;
@@ -50,6 +51,8 @@ Route::group(['middleware' => ['auth']], function () {
     //================================
     Route::post('/mark-as-read', [NotificationController::class, 'notifread'])->name('notifread');
     Route::post('/mark-all-as-read', [NotificationController::class, 'notifreadall'])->name('notifreadall');
+    Route::get('/changedomain', [NotificationController::class, 'changedomain'])->name('changeDomain');
+    
     //================================
 
     Route::group(['middleware'=>'can:access_so'], function(){
@@ -160,6 +163,12 @@ Route::group(['middleware' => ['auth']], function () {
         // Department Maintenance
         //================================
         Route::resource('deptmaint', DepartmentController::class);
+        //================================
+
+        //================================
+        // Domain Maintenance
+        //================================
+        Route::resource('domainmaint', DomainController::class);
         //================================
         
         // QX WSA Master

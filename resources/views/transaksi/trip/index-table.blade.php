@@ -21,7 +21,7 @@
                     <td data-label="SO Type">{{$datas->getMaster->so_type}}</td>
                     <td data-label="SO Ship To">{{$datas->getMaster->so_ship_to}}</td>
                     <td data-label="SO Due Date">{{$datas->getMaster->so_due_date}}</td>
-                    <td data-label="Total Sangu">{{$datas->sos_sangu}}</td>
+                    <td data-label="Total Sangu">{{number_format($datas->sos_sangu,0)}}</td>
                     <td data-label="Total Trip">{{$datas->sos_tot_trip}}</td>
                     <td data-label="Trip Dilaporkan">{{$datas->countLaporanHist->count()}}</td>
                     <td data-label="Surat Jalan">{{$datas->countLaporanHist->whereNotNull('soh_sj')->count() > 0 ? 'Yes' : 'No'}}</td>

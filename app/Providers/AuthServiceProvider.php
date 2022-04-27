@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Master\Role;
+use App\Models\Transaksi\SalesOrderMstr;
+use App\Policies\SalesOrderPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -15,6 +17,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        // 'App\Models\Transaksi\SalesOrderMstr' => 'App\Policies\SalesOrderPolicy'
+        SalesOrderMstr::class => SalesOrderPolicy::class,
     ];
 
     /**

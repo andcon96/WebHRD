@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\Domain;
 use App\Models\Master\Kerusakan;
 use App\Models\Master\KerusakanStrukturDetail;
-use App\Models\Master\Prefix;
 use App\Models\Master\StrukturKerusakan;
 use App\Models\Master\Truck;
 use App\Models\Master\TruckDriver;
 use App\Models\Transaksi\KerusakanDetail;
 use App\Models\Transaksi\KerusakanMstr;
 use App\Services\CreateTempTable;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Exception;
 
 class KerusakanLaporMTController extends Controller
 {
@@ -29,6 +30,8 @@ class KerusakanLaporMTController extends Controller
         if ($request->s_driver) {
             $data->whereRelation('getTruckDriver.getTruck', 'id', '=', $request->s_driver);
         }
+        
+        $data->where('kerusakan_domain',Session::get('domain'));
 
         $data = $data->orderBy('created_at', 'DESC')->paginate(10);
         $truck = Truck::get();
@@ -68,6 +71,7 @@ class KerusakanLaporMTController extends Controller
             $kerusakan_mstr->kerusakan_nbr = $getrn;
             $kerusakan_mstr->kerusakan_truck_driver = $request->truckdriver;
             $kerusakan_mstr->kerusakan_date = $request->tgllapor;
+            $kerusakan_mstr->kerusakan_domain = $request->domain;
             $kerusakan_mstr->save();
 
             $id = $kerusakan_mstr->id;
@@ -78,16 +82,17 @@ class KerusakanLaporMTController extends Controller
                 $kerusakan_detail->save();
             }
 
-            $prefix = Prefix::firstOrFail();
-            $prefix->rn_kerusakan = substr($getrn, 2, 6);
+            // $prefix = Prefix::firstOrFail();
+            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
+            $prefix->domain_kr_rn = substr($getrn, 2, 6);
             $prefix->save();
 
             DB::commit();
-            alert()->success('Success', 'Kerusakan berhasil dilaporkan');
+            alert()->success('Success', 'Kerusakan berhasil dilaporkan')->persistent('Dismiss');
             return back();
         } catch (Exception $e) {
             DB::rollBack();
-            alert()->error('Error', 'Failed to create data');
+            alert()->error('Error', 'Failed to create data')->persistent('Dismiss');
             return back();
         }
     }
@@ -118,11 +123,11 @@ class KerusakanLaporMTController extends Controller
             }
 
             DB::commit();
-            alert()->success('Success', 'Kerusakan berhasil dilaporkan');
+            alert()->success('Success', 'Kerusakan berhasil dilaporkan')->persistent('Dismiss');
             return back();
         } catch (Exception $e) {
             DB::rollBack();
-            alert()->error('Error', 'Update Gagal');
+            alert()->error('Error', 'Update Gagal')->persistent('Dismiss');
             return back();
         }
     }
@@ -136,11 +141,11 @@ class KerusakanLaporMTController extends Controller
             $data->save();
 
             DB::commit();
-            alert()->success('Success', 'Kerusakan berhasil dicancel');
+            alert()->success('Success', 'Kerusakan berhasil dicancel')->persistent('Dismiss');
             return back();
         } catch (Exception $e) {
             DB::rollBack();
-            alert()->error('Error', 'Cancel Gagal');
+            alert()->error('Error', 'Cancel Gagal')->persistent('Dismiss');
             return back();
         }
     }
@@ -186,12 +191,11 @@ class KerusakanLaporMTController extends Controller
             $krmstr->save();
 
             DB::commit();
-            alert()->success('Success', 'Kerusakan berhasil dilaporkan');
+            alert()->success('Success', 'Kerusakan berhasil dilaporkan')->persistent('Dismiss');
             return redirect()->route('laporkerusakan.index');
         } catch (Exception $e) {
             DB::rollBack();
-            dd($e);
-            alert()->error('Error', 'Update Gagal');
+            alert()->error('Error', 'Update Gagal')->persistent('Dismiss');
             return back();
         }
     }

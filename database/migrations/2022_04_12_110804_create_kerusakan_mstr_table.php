@@ -15,6 +15,7 @@ class CreateKerusakanMstrTable extends Migration
     {
         Schema::create('kerusakan_mstr', function (Blueprint $table) {
             $table->id();
+            $table->string('kerusakan_domain',8);
             $table->string('kerusakan_nbr',15);
             $table->unsignedBigInteger('kerusakan_truck_driver')->index();
             $table->foreign('kerusakan_truck_driver')->references('id')->on('truckdriver')->onDelete('restrict');
