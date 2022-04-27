@@ -26,7 +26,7 @@ class WSAServices
         );
     }
 
-    public function wsaitem()
+    public function wsaitem($domain)
     {
         $wsa = Qxwsa::first();
 
@@ -38,7 +38,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = $wsa->wsas_domain;
+        // $domain = $wsa->wsas_domain;
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' .
@@ -105,7 +105,6 @@ class WSAServices
                 return true;
             }catch(Exception $e){
                 DB::rollBack();
-                dd($e);
                 return false;
             }
         }else{
@@ -113,7 +112,7 @@ class WSAServices
         }
     }
 
-    public function wsacust()
+    public function wsacust($domain)
     {
         $wsa = Qxwsa::first();
 
@@ -125,7 +124,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = $wsa->wsas_domain;
+        // $domain = $wsa->wsas_domain;
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">

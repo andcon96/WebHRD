@@ -15,8 +15,7 @@
         <form action="{{ route('customermaint.store', 'create') }}}" method="POST">
             {{ method_field('post') }}
             {{ csrf_field() }}
-            <input type="submit" class="btn bt-action" data-toggle="modal" data-target="#loadingtable"
-                data-backdrop="static" data-keyboard="false" id="btnrefresh" value="Load Table" />
+            <input type="submit" class="btn bt-action" id="btnrefresh" value="Load Table" />
         </form>
 
         <form action="{{route('customermaint.index')}}" method="get">
@@ -64,16 +63,6 @@
         {{ $cust->withQueryString()->links() }}
     </div>
 
-
-    <div class="modal fade" id="loadingtable" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="spinner-grow text-danger"></div>
-            <div class="spinner-grow text-warning" style="animation-delay:0.2s;"></div>
-            <div class="spinner-grow text-success" style="animation-delay:0.45s;"></div>
-            <div class="spinner-grow text-info" style="animation-delay:0.65s;"></div>
-            <div class="spinner-grow text-primary" style="animation-delay:0.85s;"></div>
-        </div>
-    </div>
 @endsection
 
 
@@ -81,6 +70,9 @@
     <script>
         $('#s_custcode').select2({
             width : '100%',
+        });
+        $('#btnrefresh').on('click', function(){
+            $('#loader').removeClass('hidden');
         });
     </script>
 @endsection

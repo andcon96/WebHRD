@@ -21,7 +21,6 @@
 
   <link rel="stylesheet" href="{{url('assets/css/bootstrap-select.min.css')}}">
   <link rel="stylesheet" href="{{url('assets/css/select2.min.css')}}">
-  <!-- <link rel="stylesheet" href="{{url('assets/css/style.css')}}"> -->
   <link rel="stylesheet" href="{{url('assets/css/tablestyle.css')}}">
   <link rel="stylesheet" href="{{url('assets/css/tablemobile.css')}}">
   <link rel="stylesheet" href="{{url('assets/css/checkbox.css')}}">
@@ -417,10 +416,6 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <!--Sweet Alert-->
   @include('sweetalert::alert')
-  <!-- Chart JS -->
-  <script src="{{ url('vendors/chart.js/dist/Chart.min.js') }}"></script>
-  <!-- Barcode Scanner -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 
 
   @yield('scripts')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Customer;
+use App\Models\Master\Domain;
 use App\Services\WSAServices;
 use Exception;
 use Illuminate\Http\Request;
@@ -34,11 +35,15 @@ class CustomerController extends Controller
     {
         DB::beginTransaction();
         try{
-            $loadcust = (new WSAServices())->wsacust();
-            if($loadcust === false){
-                alert()->error('Error', 'No Data from QAD');
-                DB::rollback();
-                return back();
+            $domain = Domain::get();
+            
+            foreach($domain as $domains){
+                $loadcust = (new WSAServices())->wsacust($domains->domain_code);
+                if($loadcust === false){
+                    alert()->error('Error', 'No Data from QAD');
+                    DB::rollback();
+                    return back();
+                }
             }
             alert()->success('Success', 'Customer Data Loaded');
             DB::commit();
