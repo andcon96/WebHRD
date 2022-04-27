@@ -39,7 +39,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
     //================================
-    // Logout & Home
+    // Logout & Home 123
     //================================
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -91,7 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware'=>'can:access_check_in_out'], function(){
         Route::resource('checkinout', CheckInOutController::class);
-    });
+    }); 
 
     
     Route::group(['middleware'=>'can:access_masters'], function () {
