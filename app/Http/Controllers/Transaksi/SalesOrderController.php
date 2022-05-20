@@ -43,8 +43,6 @@ class SalesOrderController extends Controller
             $data->where('so_status',$request->s_status);
         }
 
-        $data->where('so_domain',Session::get('domain'));
-
 
         $data = $data->with('getDetail')->orderBy('created_at','DESC')->paginate(10);
         return view('transaksi.salesorder.index',['data' => $data, 'cust' => $cust]);
@@ -73,7 +71,7 @@ class SalesOrderController extends Controller
     {
         DB::beginTransaction();
         try{
-            Prefix::first()->lockForUpdate();
+            Prefix::lockForUpdate()->first();
 
             $getrn = (new CreateTempTable())->getrnso();
             if($getrn === false){
@@ -128,6 +126,7 @@ class SalesOrderController extends Controller
 
         }catch(Exception $e){
             DB::rollback();
+            dd($e);
             alert()->error('Error', 'Failed to create SO')->persistent('Dismiss');
             return back();
         }

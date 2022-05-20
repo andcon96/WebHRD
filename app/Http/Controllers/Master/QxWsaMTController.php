@@ -29,7 +29,6 @@ class QxWsaMTController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'domain' => 'required',
             'wsaurl' => 'required',
             'wsapath' => 'required',
         ]);

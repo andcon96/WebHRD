@@ -21,15 +21,15 @@ class DomainTableSeeder extends Seeder
             'updated_at' => now()
         ];
 
-        DB::table('domains')->insert($data);
+        DB::table('domain')->insert($data);
 
         $data = [
-            'domain_code' => 'ASA1',
-            'domain_desc' => 'ASA1',
+            'domain_code' => '10USA',
+            'domain_desc' => '10USA',
             'created_at' => now(),
             'updated_at' => now()
         ];
 
-        DB::table('domains')->insert($data);
+        DB::table('domain')->insert($data);
     }
 }

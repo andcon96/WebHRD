@@ -10,43 +10,28 @@
 
 @section('content')
 
-<!-- Page Heading -->
-<ul>
-
-  @if(count($errors) > 0)
-  <div class="alert alert-danger">
-    <ul>
-      @foreach ($errors->all() as $error)
-      <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-  </div>
-  @endif
-
-</ul>
-
 <input type="hidden" id="tmp_username" />
 <input type="hidden" id="tmp_name" />
 
-<div class="form-group row" style="margin-bottom:0px !important;margin-left:1px;">
-  <div class="col-md-2">
-    <button class="btn bt-action newUser mb-3" style="margin-left:10px;" data-toggle="modal" data-target="#createModal">
+<div class="form-group row col-md-12">
+  <div class="col-md-2 mt-2">
+    <button class="btn bt-action newUser mb-3" data-toggle="modal" data-target="#createModal">
       Create User
     </button>
   </div>
-  <label for="s_username" class="col-md-1 col-form-label">{{ __('Username') }}</label>
-  <div class="col-md-2">
+  <label for="s_username" class="col-md-1 mt-2 col-form-label">{{ __('Username') }}</label>
+  <div class="col-md-2 mt-2">
     <input id="s_username" type="text" class="form-control" name="s_username" autocomplete="off" autofocus>
   </div>
 
-  <label for="s_name" class="col-md-1 col-form-label">{{ __('Name') }}</label>
-  <div class="col-md-2">
+  <label for="s_name" class="col-md-1 mt-2 col-form-label">{{ __('Name') }}</label>
+  <div class="col-md-2 mt-2">
     <input id="s_name" type="text" class="form-control" name="s_name" autocomplete="off" autofocus>
   </div>
 
-  <div class="col-md-2 offset-md-1">
+  <div class="col-md-2 offset-md-1 mt-2">
     <input type="button" class="btn bt-ref" id="btnsearch" value="Search" />
-    <button class="btn bt-action" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i class="fa fa-sync"></i></button>
+    <button class="btn bt-action ml-2" id='btnrefresh' style="width: 40px !important"><i class="fa fa-sync"></i></button>
   </div>
 </div>
 

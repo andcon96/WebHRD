@@ -135,7 +135,7 @@
         cols += '</td>';
 
         cols += '<td>';
-        cols += '<input type="text" class="form-control" name="sorn[]" value="{{$domains->domain_so_rn}}" readonly maxlength="6" minlength="6" required />';
+        cols += '<input type="text" class="form-control" name="sorn[]" value="{{$domains->domain_so_rn ?? ''}}" readonly maxlength="6" minlength="6" required />';
         cols += '</td>';
 
         cols += '<td>';
@@ -143,7 +143,7 @@
         cols += '</td>';
 
         cols += '<td>';
-        cols += '<input type="text" class="form-control" name="krrn[]" value="{{$domains->domain_kr_rn}}" readonly maxlength="6" minlength="6" required />';
+        cols += '<input type="text" class="form-control" name="krrn[]" value="{{$domains->domain_kr_rn ?? ''}}" readonly maxlength="6" minlength="6" required />';
         cols += '</td>';
 
         cols += '<td data-title="Action"><input type="button" class="ibtnDel btn btn-danger btn-focus"  value="Delete"></td>';

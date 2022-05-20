@@ -36,7 +36,6 @@ class SalesOrderSanguController extends Controller
             $data->where('so_status',$request->s_status);
         }
 
-        $data->where('so_domain',Session::get('domain'));
 
         $data = $data->with('getDetail')->orderBy('created_at','DESC')->paginate(10);
 

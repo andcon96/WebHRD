@@ -325,37 +325,7 @@
       <!-- Main content -->
       <div class="content">
         <div class="container-fluid">
-          @if(session('error'))
-          <div class="alert alert-danger alert-dismissible fade show" id="getError" role="alert">
-            {{ session()->get('error') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          @endif
-
-          @if(session()->has('updated'))
-          <div class="alert alert-success  alert-dismissible fade show" role="alert">
-            {{ session()->get('updated') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          @endif
-
-          @if(session('errors'))
-          <div class="alert alert-danger alert-dismissible fade show" id="getError" role="alert">
-            @foreach ($errors->all() as $err)
-            <li>{{$err}}</li>
-            @endforeach
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          @endif
-
           @yield('content')
-
           <div id="loader" class="lds-dual-ring hidden overlay"></div>
         </div>
         <!-- /.container-fluid -->
@@ -419,6 +389,30 @@
 
 
   @yield('scripts')
+
+  @if(session('errors'))
+  <script type="text/javascript">
+    var newerror = [];
+
+    <?php
+    foreach ($errors->all() as $err) {
+      echo "newerror.push('" . $err . "');";
+    }
+    ?>
+    var countnewerror = newerror.length;
+    var newtext = '';
+    for (var i = 0; i < countnewerror; i++) {
+
+      newtext += '<li>' + newerror[i] + '</li>';
+    }
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      html: newtext,
+      showCloseButton: true,
+    })
+  </script>
+  @endif
 
   <script type="text/javascript">
     $(document).ready(function() {

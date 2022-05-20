@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             DepartmentsTableSeeder::class,
             UsersTableSeeder::class,
             QxWsaTableSeeder::class,
+            DomainTableSeeder::class,
         ]);
     }
 }

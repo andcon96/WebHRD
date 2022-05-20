@@ -74,12 +74,12 @@ class UserMTController extends Controller
         $this->validate($request, [
             'username' => 'required|unique:users',
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'dept' => 'required',
             'password' => 'required|min:8|max:20',
             'password_confirmation' => 'required|min:8|max:20|same:password',
         ], [
-            'unique' => 'Email Must Be Unique',
+            'unique' => 'Username Must Be Unique',
         ]);
 
         $users = User::where('isActive', 1)->get();
