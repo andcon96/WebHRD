@@ -43,7 +43,6 @@ class SuratJalanLaporMTController extends Controller
             ->where('sos_so_mstr_id', $so)
             ->whereRelation('getTruckDriver.getTruck', 'id', '=', $truck)
             ->firstOrFail();
-            
         return view('transaksi.suratjalan.laporsj', compact('data'));
     }
 

@@ -24,7 +24,7 @@
                 <td data-label="SO Status">{{$datas->so_status}}</td>
                 <td>
                     <a href="{{route('sosangu.show',$datas->id) }}"><i class="fas fa-eye"></i></a>
-                    @if($datas->so_status == 'New' || $datas->so_status == 'Open')
+                    @if($datas->new_open_so)
                     <a href="{{route('sosangu.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
                     @endif
                 </td>

@@ -82,23 +82,16 @@ class UserMTController extends Controller
             'unique' => 'Username Must Be Unique',
         ]);
 
-        $users = User::where('isActive', 1)->get();
-        if ($users->count() >= 13) {
-            alert()->error('Error', 'Exceeded Maximum Allowed User');
-            return back();
-        }
-
-        $role = $request->role;
-        $dept = $request->dept;
-
-        $password = $request->password;
-
-        $storeUser = new User();
-
-        $role_id = Role::where('role', $role)->value('id');
-
         DB::beginTransaction();
         try {
+            $dept = $request->dept;
+            $password = $request->password;
+
+            $role = $request->role;
+            $role_id = Role::where('role', $role)->value('id');
+
+            $storeUser = new User();
+
             $storeUser->username = $request->input('username');
             $storeUser->name = $request->input('name');
             $storeUser->email = $request->input('email');

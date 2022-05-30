@@ -55,19 +55,27 @@ class TripLaporMTController extends Controller
             })
             ->findOrFail($id);
 
+        $listdriver = SalesOrderSangu::with(['getTruckDriver.getUser','getTruckDriver.getTruck'])
+                    ->where('sos_so_mstr_id', $id)
+                    ->get();
+                    
         $sohbyso = SOHistTrip::query()
             ->with(['getMaster', 'getTruckDriver.getUser', 'getTruckDriver.getTruck'])
             ->join('so_sangu', function ($e) {
                 $e->on('so_hist_trip.soh_so_mstr_id', 'so_sangu.sos_so_mstr_id');
                 $e->on('so_hist_trip.soh_driver', 'so_sangu.sos_truck');
             });
+
         if (Auth::user()->role_id != '1') {
             $sohbyso->whereRelation('getTruckDriver.getUser', 'id', '=', Auth::id());
         }
 
-        $sohbyso = $sohbyso->where('soh_so_mstr_id', $id)->select('*','so_hist_trip.created_at as tglhist')->orderBy('soh_driver', 'ASC')->get();
+        $sohbyso = $sohbyso->where('soh_so_mstr_id', $id)
+                           ->select('*','so_hist_trip.created_at as tglhist')
+                           ->orderBy('soh_driver', 'ASC')
+                           ->get();
         
-        return view('transaksi.trip.lapor.edit', compact('data', 'sohbyso'));
+        return view('transaksi.trip.lapor.edit', compact('data', 'sohbyso', 'listdriver'));
     }
 
     public function update(Request $request)

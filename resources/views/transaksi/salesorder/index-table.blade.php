@@ -29,7 +29,8 @@
                         data-duedate="{{$datas->so_due_date}}" 
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></button>
-                    @if($datas->so_status == 'New')
+                        
+                    @if($datas->new_so)
                     <a href="{{route('salesorder.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
 
                     <a href="" class="deleteModal" 

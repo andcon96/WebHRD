@@ -3,10 +3,10 @@
         <thead>
             <tr>
                 <th width="10%">Line</th>
-                <th>Part</th>
-                <th>UM</th>
-                <th>Qty Order</th>
-                <th>Qty Ship</th>
+                <th width="50%">Part</th>
+                <th width="10%">UM</th>
+                <th width="10%">Qty Order</th>
+                <th width="10%">Qty Ship</th>
                 <th width="10%">Delete</th>
             </tr>
         </thead>

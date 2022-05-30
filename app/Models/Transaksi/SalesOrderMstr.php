@@ -26,6 +26,18 @@ class SalesOrderMstr extends Model
         return $this->hasMany(SalesOrderSangu::class, 'sos_so_mstr_id');
     }
 
+    public function getNewSoAttribute()
+    {
+        // std get NewSo Attribute -> new_so , Ilangin get & Attribute
+        return $this->so_status == 'New';
+    }
+
+    public function getNewOpenSoAttribute()
+    {
+        // std get NewOpenSo Attribute -> new_open_so , Ilangin get & Attribute
+        return $this->so_status == 'New' || $this->so_status == 'Open';
+    }
+
     protected static function boot()
     {
         parent::boot();
