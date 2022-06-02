@@ -124,12 +124,12 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        // $domain = $wsa->wsas_domain;
+        $domain = $wsa->wsas_domain;
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
             <Body>
-            <HRD_cust_mstr xmlns="urn:iris.co.id:wsatest">
+            <HRD_cust_mstr xmlns="'.$wsa->wsas_path.'">
             <inpdomain>'.$domain.'</inpdomain>
             </HRD_cust_mstr>
             </Body>
@@ -177,7 +177,7 @@ class WSAServices
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
         
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
-        dd($qdocResponse);
+        
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
 
         if($qdocResult == 'true'){
