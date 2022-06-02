@@ -177,6 +177,7 @@ class WSAServices
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
         
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
+        dd($qdocResponse);
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
 
         if($qdocResult == 'true'){
