@@ -24,9 +24,9 @@
             </div>
             <div class="input-field">
               <select name="domain" id="domain" style="width:100%;height:50px;font-size:16px;padding-left:10px;">
-                <option value="ASA">ASA</option>
-                <option value="ASA2">ASA 2</option>
-                <option value="10USA">10USA</option>
+                <option value="HSS">HSS</option>
+                <option value="AS">AS</option>
+                <option value="SPJS">SPJS</option>
               </select>
             </div>
             <div class="button">
