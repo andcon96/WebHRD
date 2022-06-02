@@ -39,7 +39,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        // $domain = $wsa->wsas_domain;
+        $domain = Session::get('domain');
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' .
