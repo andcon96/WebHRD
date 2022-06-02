@@ -49,7 +49,6 @@ class CustomerController extends Controller
             DB::commit();
             return back();
         }catch(Exception $err){
-            dd($err);
             alert()->error('Error', 'WSA Failed');
             DB::rollback();
             return back();
