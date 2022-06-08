@@ -97,19 +97,16 @@ class WSAServices
             DB::beginTransaction();
             try{
                 foreach($dataloop as $datas){
-                    Item::updateOrCreate([
+                    dump($datas);
+                    $item = Item::updateOrCreate([
                         'item_part' => $datas->t_part,
                         'item_domain' => $datas->t_domain
-                    ],[
-                        'item_desc' => $datas->t_desc,
-                        'item_um' => $datas->t_um,
-                        'created_at' => Carbon::now()->toDateTimeString(),
-                        'updated_at' => Carbon::now()->toDateTimeString(),
                     ]);
-                    // $item->item_desc = $datas->t_desc;
-                    // $item->item_um = $datas->t_um;
-                    // $item->save();
+                    $item->item_desc = $datas->t_desc;
+                    $item->item_um = $datas->t_um;
+                    $item->save();
                 }
+                dd('stop');
                 DB::commit();
                 return true;
             }catch(Exception $e){
