@@ -37,13 +37,11 @@ class ItemMTController extends Controller
         try{
             $domain = Domain::get();
             
-            foreach($domain as $domains){
-                $loadcust = (new WSAServices())->wsaitem($domains->domain_code);
-                if($loadcust === false){
-                    alert()->error('Error', 'No Data from QAD');
-                    DB::rollback();
-                    return back();
-                }
+            $loadcust = (new WSAServices())->wsaitem();
+            if($loadcust === false){
+                alert()->error('Error', 'No Data from QAD');
+                DB::rollback();
+                return back();
             }
             alert()->success('Success', 'Customer Data Loaded');
             DB::commit();

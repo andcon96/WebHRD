@@ -27,7 +27,7 @@ class WSAServices
         );
     }
 
-    public function wsaitem($domain)
+    public function wsaitem()
     {
         $wsa = Qxwsa::first();
 
@@ -92,23 +92,21 @@ class WSAServices
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        // dd($qdocResult,$qdocResponse,$dataloop);
+        
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
                 foreach($dataloop as $datas){
-                    dump($datas);
-                    // $item = Item::updateOrCreate([
-                    //     'item_part' => $datas->t_part,
-                    //     'item_domain' => $datas->t_domain
-                    // ]);
-                    $item = new Item();
-                    $item->item_part = $datas->t_part;
+                    $item = Item::updateOrCreate([
+                        'item_part' => $datas->t_part,
+                        'item_domain' => $datas->t_domain
+                    ]);
+                    
                     $item->item_desc = $datas->t_desc;
                     $item->item_um = $datas->t_um;
                     $item->save();
                 }
-                // dd('stop');
+                
                 DB::commit();
                 return true;
             }catch(Exception $e){
@@ -120,7 +118,7 @@ class WSAServices
         }
     }
 
-    public function wsacust($domain)
+    public function wsacust()
     {
         $wsa = Qxwsa::first();
 
