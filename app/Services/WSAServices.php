@@ -189,10 +189,12 @@ class WSAServices
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
-                Customer::truncate();
 
                 foreach($dataloop as $datas){
-                    $cust = Customer::firstOrNew(['cust_code' => $datas->t_cmaddr]);
+                    $cust = Customer::firstOrNew([
+                        'cust_code' => $datas->t_cmaddr,
+                        'cust_domain' => $domain
+                    ]);
                     $cust->cust_desc = $datas->t_cmname;
                     $cust->cust_alt_desc = $datas->t_cmname;
                     $cust->cust_site = $datas->t_cmsite;
