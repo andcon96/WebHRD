@@ -92,7 +92,7 @@ class WSAServices
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        dd($qdocResult,$qdocResponse);
+        dd($qdocResult,$qdocResponse,$dataloop);
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
