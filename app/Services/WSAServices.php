@@ -96,8 +96,9 @@ class WSAServices
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
+                dump('1');
                 item::truncate();
-
+                dump('2');
                 foreach($dataloop as $datas){
                     $item = Item::updateOrCreate([
                         'item_part' => $datas->t_part,
@@ -109,6 +110,7 @@ class WSAServices
                     $item->save();
                 }
                 
+                dd('3');
                 DB::commit();
                 return true;
             }catch(Exception $e){
