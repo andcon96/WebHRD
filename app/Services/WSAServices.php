@@ -96,6 +96,8 @@ class WSAServices
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
+                item::truncate();
+
                 foreach($dataloop as $datas){
                     $item = Item::updateOrCreate([
                         'item_part' => $datas->t_part,
@@ -189,6 +191,8 @@ class WSAServices
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
+                Customer::truncate();
+
                 foreach($dataloop as $datas){
                     $cust = Customer::firstOrNew(['cust_code' => $datas->t_cmaddr]);
                     $cust->cust_desc = $datas->t_cmname;
