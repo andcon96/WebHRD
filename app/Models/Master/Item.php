@@ -2,8 +2,10 @@
 
 namespace App\Models\Master;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class Item extends Model
 {
@@ -13,4 +15,14 @@ class Item extends Model
     protected $fillable = [
         'item_part',
     ];
+
+    
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::addGlobalScope(function(Builder $builder){
+            $builder->where('item_domain', Session::get('domain'));
+        });
+    }
 }

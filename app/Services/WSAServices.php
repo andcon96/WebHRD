@@ -97,7 +97,7 @@ class WSAServices
             DB::beginTransaction();
             try{
                 foreach($dataloop as $datas){
-                    $item = Item::firstOrNew(['item_part' => $datas->t_part]);
+                    $item = Item::updateOrCreate(['item_part' => $datas->t_part,'item_domain'=>$domain]);
                     $item->item_desc = $datas->t_desc;
                     $item->item_um = $datas->t_um;
                     $item->save();
