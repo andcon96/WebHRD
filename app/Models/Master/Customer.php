@@ -22,7 +22,7 @@ class Customer extends Model
 
         
         self::creating(function($model){
-            $model->item_domain = Session::get('domain');
+            $model->cust_domain = Session::get('domain');
         });
 
         self::addGlobalScope(function(Builder $builder){
