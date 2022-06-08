@@ -185,7 +185,7 @@ class WSAServices
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
         
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-
+        dd($qdocResponse,$dataloop);
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
