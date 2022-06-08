@@ -205,6 +205,7 @@ class WSAServices
                 return true;
             }catch(Exception $e){
                 DB::rollBack();
+                dd($e);
                 return false;
             }
         }else{
