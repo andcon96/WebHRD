@@ -105,6 +105,12 @@ class WSAServices
                         $item->item_desc = $datas->t_desc;
                         $item->item_um = $datas->t_um;
                         $item->save();
+                    }else{
+                        $item = new Item();
+                        $item->item_part = $datas->t_part;
+                        $item->item_desc = $datas->t_desc;
+                        $item->item_um = $datas->t_um;
+                        $item->save();
                     }
                 }
                 
