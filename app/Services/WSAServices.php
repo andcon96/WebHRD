@@ -92,15 +92,23 @@ class WSAServices
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        dd($qdocResult,$qdocResponse,$dataloop);
+        // dd($qdocResult,$qdocResponse,$dataloop);
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
                 foreach($dataloop as $datas){
-                    $item = Item::updateOrCreate(['item_part' => $datas->t_part,'item_domain'=>$domain]);
-                    $item->item_desc = $datas->t_desc;
-                    $item->item_um = $datas->t_um;
-                    $item->save();
+                    Item::updateOrCreate([
+                        'item_part' => $datas->t_part,
+                        'item_domain' => $datas->t_domain
+                    ],[
+                        'item_desc' => $datas->t_desc,
+                        'item_um' => $datas->t_um,
+                        'created_at' => Carbon::now()->toDateTimeString(),
+                        'updated_at' => Carbon::now()->toDateTimeString(),
+                    ]);
+                    // $item->item_desc = $datas->t_desc;
+                    // $item->item_um = $datas->t_um;
+                    // $item->save();
                 }
                 DB::commit();
                 return true;
