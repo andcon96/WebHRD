@@ -96,18 +96,16 @@ class WSAServices
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
-                item::truncate();
+                
                 foreach($dataloop as $datas){
-                    // $item = Item::updateOrCreate([
-                    //     'item_part' => $datas->t_part,
-                    //     'item_domain' => $datas->t_domain
-                    // ]);
-
-                    $item = new Item();
-                    $item->item_part = $datas->t_part;
-                    $item->item_desc = $datas->t_desc;
-                    $item->item_um = $datas->t_um;
-                    $item->save();
+                    $item = Item::where('item_part',$datas->t_part)
+                                ->where('item_domain',$datas->t_domain)
+                                ->first();
+                    if($item){
+                        $item->item_desc = $datas->t_desc;
+                        $item->item_um = $datas->t_um;
+                        $item->save();
+                    }
                 }
                 
                 DB::commit();
