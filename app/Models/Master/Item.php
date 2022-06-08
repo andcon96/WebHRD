@@ -21,6 +21,11 @@ class Item extends Model
     {
         parent::boot();
 
+        
+        self::creating(function($model){
+            $model->item_domain = Session::get('domain');
+        });
+
         self::addGlobalScope(function(Builder $builder){
             $builder->where('item_domain', Session::get('domain'));
         });
