@@ -185,13 +185,13 @@ class WSAServices
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
         
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        dd($qdocResponse,$dataloop);
+        // dd($qdocResponse,$dataloop);
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
 
                 foreach($dataloop as $datas){
-                    $cust = Customer::firstOrNew([
+                    $cust = Customer::updateOrCreate([
                         'cust_code' => $datas->t_cmaddr,
                         'cust_domain' => $domain
                     ]);
