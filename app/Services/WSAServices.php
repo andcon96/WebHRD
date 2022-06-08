@@ -104,16 +104,18 @@ class WSAServices
                     if($item){
                         $item->item_desc = $datas->t_desc;
                         $item->item_um = $datas->t_um;
+                        dump('Insert :'.$datas->t_part);
                         $item->save();
                     }else{
                         $item = new Item();
                         $item->item_part = $datas->t_part;
                         $item->item_desc = $datas->t_desc;
                         $item->item_um = $datas->t_um;
+                        dump('Update : '.$datas->t_part);
                         $item->save();
                     }
                 }
-                
+                dd('stop');
                 DB::commit();
                 return true;
             }catch(Exception $e){
