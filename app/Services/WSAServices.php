@@ -98,15 +98,17 @@ class WSAServices
             try{
                 foreach($dataloop as $datas){
                     dump($datas);
-                    $item = Item::updateOrCreate([
-                        'item_part' => $datas->t_part,
-                        'item_domain' => $datas->t_domain
-                    ]);
+                    // $item = Item::updateOrCreate([
+                    //     'item_part' => $datas->t_part,
+                    //     'item_domain' => $datas->t_domain
+                    // ]);
+                    $item = new Item();
+                    $item->item_part = $datas->t_part;
                     $item->item_desc = $datas->t_desc;
                     $item->item_um = $datas->t_um;
                     $item->save();
                 }
-                dd('stop');
+                // dd('stop');
                 DB::commit();
                 return true;
             }catch(Exception $e){
