@@ -500,7 +500,7 @@ class QxtendServices
     if (is_bool($qdocResponse)) {
       return false;
     }
-    dd($qdocResponse);
+    dd($qdocResponse, $qdocRequest);
 
     $xmlResp = simplexml_load_string($qdocResponse);
 
