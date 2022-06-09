@@ -500,6 +500,8 @@ class QxtendServices
     if (is_bool($qdocResponse)) {
       return false;
     }
+    dd($qdocResponse);
+
     $xmlResp = simplexml_load_string($qdocResponse);
 
     $xmlResp->registerXPathNamespace('ns1', 'urn:schemas-qad-com:xml-services');
