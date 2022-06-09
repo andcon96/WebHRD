@@ -40,7 +40,7 @@
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
-                <input id="shipto" type="text" class="form-control" name="shipto" value="" autocomplete="off" maxlength="24" required autofocus>
+                <input id="shipto" type="text" class="form-control" name="shipto" value="" autocomplete="off" maxlength="24" required readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -93,6 +93,11 @@
     function selectRefresh() {
         $('.selectpicker').selectpicker().focus();
     }
+
+    $(document).on('change', '#customer',function(){
+        let value = $(this).val();
+        $('#shipto').val(value);
+    });
 
     $(document).on('click', '#addrow', function() {
         var rowCount = $('#createTable tr').length;

@@ -18,7 +18,7 @@ class CreateSalesOrderDetailTable extends Migration
             $table->unsignedBigInteger('sod_so_mstr_id')->index();
             $table->foreign('sod_so_mstr_id')->references('id')->on('so_mstr')->onDelete('restrict');
             $table->integer('sod_line');
-            $table->string('sod_part',15);
+            $table->string('sod_part',50);
             $table->decimal('sod_qty_ord',15,2);
             $table->decimal('sod_qty_ship',15,2);
             $table->string('sod_um',2);
