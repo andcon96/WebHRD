@@ -22,6 +22,9 @@
                     <a href="{{ route('LaporSJ', ['so' => $datas->getMaster->id, 'truck' => $datas->getTruckDriver->getTruck->id]) }}">
                         <i class="fas fa-edit"></i>
                     </a>
+                    <a href="{{ route('CatatSJ', ['so' => $datas->getMaster->id, 'truck' => $datas->getTruckDriver->getTruck->id]) }}">
+                        <i class="fas fa-book"></i>
+                    </a>
                 </td>
             </tr>
             @empty

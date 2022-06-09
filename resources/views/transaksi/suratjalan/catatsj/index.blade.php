@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('updateSJ') }}" method="POST" id="submit">
+<form action="{{ route('updateCatatSJ') }}" method="POST" id="submit">
     @method('POST')
     @csrf
     <div class="row">
@@ -43,8 +43,9 @@
                 <input id="type" type="text" class="form-control" name="type" value="{{$data->getMaster->so_type}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
+        <label for="duedate" class="col-md-4 col-form-label text-md-right">History & Pelaporan SJ</label>
         <div class="form-group row col-md-12">
-            @include('transaksi.suratjalan.laporsj-table-detail')
+            @include('transaksi.suratjalan.catatsj.index-table')
         </div>
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
@@ -59,45 +60,5 @@
         </div>
     </div>
 </form>
-@endsection
 
-
-@section('scripts')
-<script>
-    $("#duedate").datepicker({
-        dateFormat: 'yy-mm-dd',
-        minDate: '+0d',
-        onClose: function() {
-            $("#addrow").focus();
-        }
-    });
-    $(".tglakui").datepicker({
-        dateFormat: 'yy-mm-dd',
-    });
-
-    $(document).on('submit', '#submit', function(e) {
-        document.getElementById('btnconf').style.display = 'none';
-        document.getElementById('btnback').style.display = 'none';
-        document.getElementById('btnloading').style.display = '';
-    });
-
-    $(document).on('click', '.btnconf', function(e){
-        e.preventDefault();
-        Swal.fire({
-            title: "Lapor Surat Jalan ?",
-            text: "Pastikan Data Sudah Sesuai",
-            type: "warning",
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Lapor",
-            closeOnConfirm: false
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                $('#submit').submit();
-            }
-        })
-    });
-</script>
 @endsection

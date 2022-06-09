@@ -78,4 +78,41 @@ class SuratJalanLaporMTController extends Controller
         }
 
     }
+
+    public function catatsj($so, $truck)
+    {
+        $truckDriver = TruckDriver::where('truck_no_polis', $truck)->where('truck_is_active', 1)->firstOrFail();
+        $idTruckDriver = $truckDriver->id ?? 0;
+        
+        $data = SalesOrderSangu::with(['getTruckDriver.getTruck','getMaster.getDetail',
+            'countLaporanHist.getTruckDriver.getTruck',
+            'countLaporanHist.getTruckDriver.getUser'])
+            ->with('countLaporanHist', function ($query) use ($idTruckDriver) {
+                $query->where('soh_driver', '=', $idTruckDriver);
+            })
+            ->where('sos_so_mstr_id', $so)
+            ->whereRelation('getTruckDriver.getTruck', 'id', '=', $truck)
+            ->firstOrFail();
+        return view('transaksi.suratjalan.laporsj', compact('data'));
+    }
+
+    public function updatecatatsj(Request $request){
+        DB::beginTransaction();
+        try{
+            // Save SJ
+            foreach($request->idhist as $key => $idhist){
+                $sohist = SOHistTrip::findOrFail($idhist);
+                $sohist->soh_sj = $request->sj[$key];
+                $sohist->save();
+            }
+
+            DB::commit();
+            alert()->success('Success', 'Surat Jalan Berhasil Disimpan')->persistent('Dismiss');
+            return back();
+        }catch(Exception $e){
+            DB::rollback();
+            alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');
+            return back();
+        }
+    }
 }
