@@ -367,8 +367,8 @@ class QxtendServices
                       xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
                       <soapenv:Header>
                         <wsa:Action/>
-                        <wsa:To>urn:services-qad-com:QX_DNP</wsa:To>
-                        <wsa:MessageID>urn:services-qad-com::QX_DNP</wsa:MessageID>
+                        <wsa:To>urn:services-qad-com:QADHSS</wsa:To>
+                        <wsa:MessageID>urn:services-qad-com::QADHSS</wsa:MessageID>
                         <wsa:ReferenceParameters>
                           <qcom:suppressResponseDetail>false</qcom:suppressResponseDetail>
                         </wsa:ReferenceParameters>
