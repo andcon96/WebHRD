@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Services\WSAServices;
 use Exception;
@@ -14,7 +15,9 @@ class CustomerShipToController extends Controller
     public function index(){
         $data = CustomerShipTo::get();
 
-        return view('setting.customer.shipto.index',compact('data'));
+        $listcust = Customer::get();
+
+        return view('setting.customer.shipto.index',compact('data','listcust'));
     }
 
     public function store()
