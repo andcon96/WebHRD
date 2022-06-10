@@ -204,8 +204,8 @@ class QxtendServices
                   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
                   <soapenv:Header>
                     <wsa:Action/>
-                    <wsa:To>urn:services-qad-com:QX_DNP</wsa:To>
-                    <wsa:MessageID>urn:services-qad-com::QX_DNP</wsa:MessageID>
+                    <wsa:To>urn:services-qad-com:QADHSS</wsa:To>
+                    <wsa:MessageID>urn:services-qad-com::QADHSS</wsa:MessageID>
                     <wsa:ReferenceParameters>
                       <qcom:suppressResponseDetail>true</qcom:suppressResponseDetail>
                     </wsa:ReferenceParameters>
@@ -244,7 +244,7 @@ class QxtendServices
                             <qcom:ttContext>
                                 <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
                                 <qcom:propertyName>password</qcom:propertyName>
-                                <qcom:propertyValue>XVytW</qcom:propertyValue>
+                                <qcom:propertyValue></qcom:propertyValue>
                             </qcom:ttContext>
                             <qcom:ttContext>
                                 <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
@@ -336,7 +336,7 @@ class QxtendServices
     if (is_bool($qdocResponse)) {
       return false;
     }
-    dd($qdocResponse);
+    
     $xmlResp = simplexml_load_string($qdocResponse);
 
     $xmlResp->registerXPathNamespace('ns1', 'urn:schemas-qad-com:xml-services');
