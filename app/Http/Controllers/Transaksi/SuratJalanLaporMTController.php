@@ -79,6 +79,7 @@ class SuratJalanLaporMTController extends Controller
             return back();
         }catch(Exception $e){
             DB::rollback();
+            dd($e);
             alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');
             return back();
         }

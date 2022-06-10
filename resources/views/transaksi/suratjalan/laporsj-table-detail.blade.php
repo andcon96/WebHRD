@@ -2,13 +2,13 @@
     <table class="table table-bordered edittable" id="editTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width="10%">Line</th>
-                <th>Part</th>
-                <th width="8%">UM</th>
+                <th width="5%">Line</th>
+                <th width="25%">Part</th>
+                <th width="5%">UM</th>
                 <th width="10%">Qty Order</th>
                 <th width="10%">Qty Open</th>
                 <th width="10%">Qty Diakui</th>
-                <th width="12%">Tanggal</th>
+                <th width="10%">Tanggal</th>
                 <th width="25%">Remarks</th>
             </tr>
         </thead>
