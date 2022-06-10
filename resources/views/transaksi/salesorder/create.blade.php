@@ -40,7 +40,6 @@
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
-                {{-- <input id="shipto" type="text" class="form-control" name="shipto" value="" autocomplete="off" maxlength="24" required readonly> --}}
                 <select name="shipto" id="shipto" class="form-control" required>
                     <option value="">Select Data</option>
                 </select>
@@ -100,15 +99,14 @@
     $(document).on('change', '#customer',function(){
         let value = $(this).val();
 
-        let shipto = $('#shipto');
-
         $.ajax({
             url: "/getshipto",
             data: {
                 search: value,
             },
             success: function(data) {
-                shipto.val(data);
+                console.log(data);
+                $('#shipto').html('').append(data);
             }
         });
     });

@@ -261,6 +261,6 @@ class SalesOrderController extends Controller
             }
         }
 
-        return response($output);
+        return $output;
     }
 }
