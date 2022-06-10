@@ -61,7 +61,7 @@
                 @endforelse
             </tbody>
         </table>
-        {{ $cust->withQueryString()->links() }}
+        {{ $data->withQueryString()->links() }}
     </div>
 
 @endsection
