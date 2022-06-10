@@ -12,8 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerShipToController extends Controller
 {
-    public function index(){
-        $data = CustomerShipTo::paginate(10);
+    public function index(Request $request){
+        $data = CustomerShipTo::query();
+
+        if($request->s_custcode){
+            $data->where('id',$request->s_custcode);
+        }
+        
+        $data = $data->paginate(10);
 
         $listcust = Customer::get();
 

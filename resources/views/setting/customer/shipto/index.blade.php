@@ -36,11 +36,11 @@
         </form>
     </div>
 
-    <div class="table-responsive col-lg-8 offset-lg-2 col-md-12">
+    <div class="table-responsive col-lg-10 offset-lg-1 col-md-12">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th width="10%">Customer Code</th>
+                    <th width="15%">Customer Code</th>
                     <th width="10%">Ship To Code</th>
                     <th width="15%">Ship To Desc</th>
                     <th>Ship To Address</th>
