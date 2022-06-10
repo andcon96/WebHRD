@@ -4,8 +4,8 @@
             <tr>
                 <th style="width:15%">Sales Order</th>
                 <th style="width:25%">Customer</th>
-                <th style="width:10%">Ship From</th>
                 <th style="width:10%">Ship To</th>
+                <th style="width:10%">Ship From</th>
                 <th style="width:15%">Due Date</th>
                 <th style="width:10%">SO Status</th>
                 <th style="width:10%">Action</th>
