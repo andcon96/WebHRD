@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Customer;
+use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Domain;
 use App\Models\Master\Item;
 use App\Models\Master\Prefix;
@@ -245,5 +246,21 @@ class SalesOrderController extends Controller
         $um = $item->item_um ?? '';
 
         return $um;
+    }
+
+    public function getshipto(Request $request){
+        $output = '';
+
+        $customer = Customer::where('cust_code',$request->search)->firstOrFail();
+        $output .= '<option value="'.$customer->cust_code.'">'.$customer->cust_code.'</option>';
+
+        $shipto = CustomerShipTo::where('cust_code',$request->search)->get();
+        if($shipto->count() > 0){
+            foreach($shipto as $data){
+                $output .= '<option value="'.$data->cust_shipto.'">'.$data->cust_shipto.'</option>';
+            }
+        }
+
+        return response($output);
     }
 }

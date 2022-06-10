@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('salesorder', SalesOrderController::class);
         Route::get('/salesorder/getdetail/{id}', [SalesOrderController::class, 'getdetail'])->name('getDetailSO');
         Route::get('/getum', [SalesOrderController::class, 'getUM'])->name('getum');
+        Route::get('/getshipto', [SalesOrderController::class, 'getshipto'])->name('getShipTo');
     });
 
     Route::group(['middleware'=>'can:access_so_sangu'], function(){
