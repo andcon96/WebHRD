@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class CustomerShipToController extends Controller
 {
     public function index(){
-        $data = CustomerShipTo::get();
+        $data = CustomerShipTo::paginate(10);
 
         $listcust = Customer::get();
 
