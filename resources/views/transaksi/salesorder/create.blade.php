@@ -77,7 +77,7 @@
 
 @section('scripts')
 <script>
-    $('#customer, #type').select2({
+    $('#customer, #type, #shipto').select2({
         width: '100%'
     });
     $("#customer").select2('open');
