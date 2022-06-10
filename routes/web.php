@@ -24,6 +24,7 @@ use App\Http\Controllers\Transaksi\SalesOrderSanguController;
 use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
+use App\Models\Master\CustomerShipTo;
 use App\Models\Transaksi\SalesOrderMstr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -181,6 +182,11 @@ Route::group(['middleware' => ['auth']], function () {
         // QX WSA Master
         //================================
         Route::resource('qxwsa', QxWsaMTController::class);
+        //================================
+        
+        // QX WSA Master
+        //================================
+        Route::resource('custshipto', CustomerShipTo::class);
         //================================
     });
 });

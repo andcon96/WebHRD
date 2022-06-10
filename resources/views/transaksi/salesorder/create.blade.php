@@ -114,6 +114,7 @@
     }
 
     $(document).on('change','#type',function(){
+        $('.selectpicker').val('');
         resetDropDownValue();
     });
 
