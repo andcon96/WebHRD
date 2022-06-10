@@ -17,6 +17,7 @@
             <label for="sonbr" class="col-md-2 col-form-label text-md-right">Nomor SO</label>
             <div class="col-md-3">
                 <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->getMaster->so_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input type="hidden" name="idmstr" value="{{$data->getMaster->id}}">
             </div>
             <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
             <div class="col-md-3">

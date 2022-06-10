@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Master\Truck;
 use App\Models\Master\TruckDriver;
 use App\Models\Transaksi\SalesOrderDetail;
+use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SalesOrderSangu;
 use App\Models\Transaksi\SOHistTrip;
 use App\Services\QxtendServices;
@@ -61,16 +62,20 @@ class SuratJalanLaporMTController extends Controller
                 alert()->error('Error', 'Url Qxtend Belum disetup')->persistent('Dismiss');
                 return back();
             }
+            // Update Mstr
+            $somstr = SalesOrderMstr::findOrFail($request->idmaster);
+            $somstr->so_remark = $request->remark;
+            $somstr->so_effdate = $request->effdate;
+            $somstr->save();
+
 
             $totalship = 0;
-            // Save Qty Ship
+            // Save Qty Ship & Update Detail
             foreach($request->iddetail as $keys => $iddetail){
                 $sodetail = SalesOrderDetail::findOrFail($iddetail);
                 $totalship = $sodetail->sod_qty_ship + $request->qtyakui[$keys];
                 
-                $sodetail->sod_date = $request->tglakui[$keys];
                 $sodetail->sod_qty_ship = $totalship;
-                $sodetail->sod_remarks = $request->remarks[$keys];
                 $sodetail->save();
             }
 
