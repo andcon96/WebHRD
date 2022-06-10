@@ -19,7 +19,7 @@ class SuratJalanLaporMTController extends Controller
     public function index(Request $request)
     {
         $data = SalesOrderSangu::query()
-            ->with(['getTruckDriver.getTruck', 'getMaster', 'getTruckDriver.getUser']);
+            ->with(['getTruckDriver.getTruck', 'getMaster.getCustomer', 'getTruckDriver.getUser']);
         $truck = Truck::get();
 
         if ($request->truck) {
