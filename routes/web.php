@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Master\AccessRoleMenuController;
 use App\Http\Controllers\Master\CustomerController;
+use App\Http\Controllers\Master\CustomerShipToController;
 use App\Http\Controllers\Master\DepartmentController;
 use App\Http\Controllers\Master\DomainController;
 use App\Http\Controllers\Master\ItemMTController;
@@ -24,8 +25,6 @@ use App\Http\Controllers\Transaksi\SalesOrderSanguController;
 use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
-use App\Models\Master\CustomerShipTo;
-use App\Models\Transaksi\SalesOrderMstr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -186,7 +185,7 @@ Route::group(['middleware' => ['auth']], function () {
         
         // QX WSA Master
         //================================
-        Route::resource('custshipto', CustomerShipTo::class);
+        Route::resource('custshipto', CustomerShipToController::class);
         //================================
     });
 });
