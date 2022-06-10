@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Master\Qxwsa;
+use App\Models\Transaksi\SalesOrderDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
@@ -270,15 +271,16 @@ class QxtendServices
 
     $qdocbody = '<dsSalesOrderShipment>
                   <SalesOrderShipment>
-                      <soNbr>'.$data->dod_so.'</soNbr>
-                      <effDate>'.$data->e_effdate.'</effDate>
-                      <document>'.$data->dod_nbr.'</document>';
-                      foreach($data as $sosedit3){ 
+                      <soNbr>'.$data['sonbr'].'</soNbr>
+                      <effDate>'.$data['effdate'].'</effDate>
+                      <document>'.$data['remark'].'</document>'
+                      ;
+                      foreach($data['iddetail'] as $key => $idDetail){
+                          $datadetail = SalesOrderDetail::findOrFail($idDetail); 
                           $qdocbody.= '
                           <lineDetail>
-                                  <line>'.$sosedit3->dod_line.'</line>
-                                  <lotserialQty>'.$sosedit3->dod_qty.'</lotserialQty>
-                                  <location>'.$sosedit3->item_location.'</location>
+                                  <line>'.$datadetail->sod_line.'</line>
+                                  <lotserialQty>'.$data['qtyakui'][$key].'</lotserialQty>
                                   <pickLogic>false</pickLogic>    
                                   <yn>true</yn>
                                   <yn1>true</yn1>        

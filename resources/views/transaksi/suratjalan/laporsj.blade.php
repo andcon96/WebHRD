@@ -44,6 +44,19 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="effdate" class="col-md-2 col-form-label text-md-right">Eff Date</label>
+            <div class="col-md-3">
+                <input id="effdate" type="text" class="form-control" name="effdate" value="{{\Carbon\Carbon::now()->toDateString()}}" autocomplete="off" maxlength="24" autofocus>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
+            <div class="col-md-9">
+                <input id="remark" type="text" class="form-control" name="remakr" value="" autocomplete="off" autofocus>
+            </div>
+        </div>
+
+        <div class="form-group row col-md-12">
             @include('transaksi.suratjalan.laporsj-table-detail')
         </div>
         <div class="form-group row col-md-12">
@@ -71,7 +84,7 @@
             $("#addrow").focus();
         }
     });
-    $(".tglakui").datepicker({
+    $("#effdate").datepicker({
         dateFormat: 'yy-mm-dd',
     });
 

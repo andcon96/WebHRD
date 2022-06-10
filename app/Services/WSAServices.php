@@ -104,6 +104,7 @@ class WSAServices
                     
                     $item->item_desc = $datas->t_desc;
                     $item->item_um = $datas->t_um;
+                    $item->item_promo = $datas->t_promo;
                     $item->save();
                 }
                 
