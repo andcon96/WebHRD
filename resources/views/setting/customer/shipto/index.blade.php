@@ -47,7 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($cust as $show)
+                @forelse($data as $show)
                     <tr>
                         <td>{{ $show->cust_code }}</td>
                         <td>{{ $show->cust_shipto }}</td>
