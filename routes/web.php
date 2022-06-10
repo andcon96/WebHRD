@@ -15,6 +15,7 @@ use App\Http\Controllers\Master\StrukturKerusakanController;
 use App\Http\Controllers\Master\TruckDriverController;
 use App\Http\Controllers\Master\TruckMTController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Transaksi\AuditTrailSanguController;
 use App\Http\Controllers\Transaksi\BrowsePolisController;
 use App\Http\Controllers\Transaksi\CheckInOutController;
 use App\Http\Controllers\Transaksi\KerusakanLaporMTController;
@@ -94,6 +95,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware'=>'can:access_check_in_out'], function(){
         Route::resource('checkinout', CheckInOutController::class);
     }); 
+
+    Route::group(['middleware'=>'can:access_audit_trail_sangu'],function(){
+        Route::resource('sanguaudit', AuditTrailSanguController::class);
+    });
 
     
     Route::group(['middleware'=>'can:access_masters'], function () {

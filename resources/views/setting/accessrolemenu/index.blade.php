@@ -40,7 +40,7 @@
 
 
 
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"  
   aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -101,6 +101,16 @@
             <div class="col-md-6">
               <label class="switch" for="cbSOAloSangu">
                 <input type="checkbox" id="cbSOAloSangu" name="cbSOAloSangu" value="SO02" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('SO Sangu Browse') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbSOBR">
+                <input type="checkbox" id="cbSOBR" name="cbSOBR" value="SO03" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -231,6 +241,11 @@
               document.getElementById("cbSOAloSangu").checked = true;  
             }else{
               document.getElementById("cbSOAloSangu").checked = false;
+            }
+            if(totmenu.search("SO03") >= 0){
+              document.getElementById("cbSOBR").checked = true;  
+            }else{
+              document.getElementById("cbSOBR").checked = false;
             }
             if(totmenu.search("TR01") >= 0){
               document.getElementById("cbTripBrowse").checked = true;  

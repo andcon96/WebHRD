@@ -133,6 +133,14 @@
                   </a>
                 </li>
                 @endcan
+                @can('access_audit_trail_sangu')
+                <li class="nav-item">
+                  <a href="{{route('sanguaudit.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Browse SO Sangu</p>
+                  </a>
+                </li>
+                @endcan
               </ul>
             </li>
             @endcan

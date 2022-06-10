@@ -2,6 +2,7 @@
 
 namespace App\Models\Transaksi;
 
+use App\Models\Master\Customer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,11 @@ class SalesOrderMstr extends Model
     public function getSangu()
     {
         return $this->hasMany(SalesOrderSangu::class, 'sos_so_mstr_id');
+    }
+
+    public function getCustomer()
+    {
+        return $this->hasOne(Customer::class, 'cust_code', 'so_cust');
     }
 
     public function getNewSoAttribute()

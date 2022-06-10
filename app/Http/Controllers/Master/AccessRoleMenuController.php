@@ -76,6 +76,7 @@ class AccessRoleMenuController extends Controller
         // Menu SO
         $cbSOMT = $request->input('cbSOMT');
         $cbSOAloSangu = $request->input('cbSOAloSangu');
+        $cbSOBrowse = $request->input('cbSOBR');
 
         // Menu Trip
         $cbTripBrowse = $request->input('cbTripBrowse');
@@ -86,7 +87,7 @@ class AccessRoleMenuController extends Controller
         // Menu Driver
         $cbDRInOut = $request->input('cbDRInOut');
 
-        $data = $cbSOMT . $cbSOAloSangu . $cbTripBrowse . $cbTripLapor . 
+        $data = $cbSOMT . $cbSOAloSangu . $cbSOBrowse . $cbTripBrowse . $cbTripLapor . 
                 $cbSJLapor . $cbKerusakan . $cbDRInOut;
 
         DB::beginTransaction();

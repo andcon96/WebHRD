@@ -99,6 +99,24 @@
         $('#shipto').val(value);
     });
 
+    function resetDropDownValue(){
+        let filter = $('#type').val();
+
+        $('.selectpicker option').each(function() {
+            if ($(this).data('type') == filter || $(this).val() == ""){  
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        })
+
+        $('.selectpicker').selectpicker('refresh');
+    }
+
+    $(document).on('change','#type',function(){
+        resetDropDownValue();
+    });
+
     $(document).on('click', '#addrow', function() {
         var rowCount = $('#createTable tr').length;
 
@@ -118,7 +136,7 @@
         cols += '<select id="barang" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="part[]" data-size="5" data-live-search="true" required autofocus>';
         cols += '<option value = ""> -- Select Data -- </option>'
         @foreach($item as $items)
-        cols += '<option value="{{$items->item_part}}"> {{$items->item_part}} -- {{$items->item_desc}} </option>';
+        cols += '<option value="{{$items->item_part}}" data-type="{{$items->item_promo}}"> {{$items->item_part}} -- {{$items->item_desc}} </option>';
         @endforeach
         cols += '</select>';
         cols += '</td>';
@@ -133,6 +151,7 @@
         counter++;
 
         selectRefresh();
+        resetDropDownValue();
     });
 
     $(document).on('change', '.qaddel', function() {
@@ -150,6 +169,8 @@
         var data = $(this).val();
         var line = $(this).closest('tr').find('.line').val();
         var um = $(this).closest('tr').find('.um');
+        
+        var type = $(this).find(':selected').data('type');
 
         $.ajax({
             url: "/getum",
@@ -163,7 +184,7 @@
 
 
         console.log(line);
-    })
+    });
 
     $(document).on('submit', '#submit', function(e) {
         document.getElementById('btnconf').style.display = 'none';
