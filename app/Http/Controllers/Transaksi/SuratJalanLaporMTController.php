@@ -63,7 +63,7 @@ class SuratJalanLaporMTController extends Controller
                 return back();
             }
             // Update Mstr
-            $somstr = SalesOrderMstr::findOrFail($request->idmaster);
+            $somstr = SalesOrderMstr::findOrFail($request->idmstr);
             $somstr->so_remark = $request->remark;
             $somstr->so_effdate = $request->effdate;
             $somstr->save();
