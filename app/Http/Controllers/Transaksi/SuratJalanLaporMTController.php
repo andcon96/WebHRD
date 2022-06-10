@@ -8,6 +8,7 @@ use App\Models\Master\TruckDriver;
 use App\Models\Transaksi\SalesOrderDetail;
 use App\Models\Transaksi\SalesOrderSangu;
 use App\Models\Transaksi\SOHistTrip;
+use App\Services\QxtendServices;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,6 +51,17 @@ class SuratJalanLaporMTController extends Controller
         // dd($request->all());
         DB::beginTransaction();
         try{
+            // Kirim Qxtend
+            $soship = (new QxtendServices())->qxSOShip($request->all());
+            if($soship === false){
+                alert()->error('Error', 'Save Gagal, Error Qxtend')->persistent('Dismiss');
+                return back();
+            }
+            if($soship == 'nourl'){
+                alert()->error('Error', 'Url Qxtend Belum disetup')->persistent('Dismiss');
+                return back();
+            }
+
             $totalship = 0;
             // Save Qty Ship
             foreach($request->iddetail as $keys => $iddetail){
@@ -60,12 +72,6 @@ class SuratJalanLaporMTController extends Controller
                 $sodetail->sod_qty_ship = $totalship;
                 $sodetail->sod_remarks = $request->remarks[$keys];
                 $sodetail->save();
-            }
-            // Save SJ
-            foreach($request->idhist as $key => $idhist){
-                $sohist = SOHistTrip::findOrFail($idhist);
-                $sohist->soh_sj = $request->sj[$key];
-                $sohist->save();
             }
 
             DB::commit();
@@ -96,8 +102,9 @@ class SuratJalanLaporMTController extends Controller
         return view('transaksi.suratjalan.catatsj.index', compact('data'));
     }
 
-    public function updatecatatsj(Request $request){
-        dd($request->all());
+    public function updatecatatsj(Request $request)
+    {
+        // dd($request->all());
         DB::beginTransaction();
         try{
             // Save SJ
