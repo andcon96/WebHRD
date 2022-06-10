@@ -254,6 +254,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="{{route('custshipto.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ship To Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{{route('itemmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Item Maintenance</p>
