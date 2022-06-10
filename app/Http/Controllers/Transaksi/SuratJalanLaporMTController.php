@@ -53,7 +53,7 @@ class SuratJalanLaporMTController extends Controller
         try{
             // Kirim Qxtend
             $soship = (new QxtendServices())->qxSOShip($request->all());
-            if($soship === false){
+            if($soship === false || $soship[0] == 'error'){
                 alert()->error('Error', 'Save Gagal, Error Qxtend')->persistent('Dismiss');
                 return back();
             }

@@ -188,7 +188,6 @@ class QxtendServices
 
   public function qxSOShip($data)
   {
-    dd($data);
     $qxwsa = Qxwsa::firstOrFail();
     if (is_null($qxwsa->qx_url)) {
       return 'nourl';
@@ -337,7 +336,6 @@ class QxtendServices
     if (is_bool($qdocResponse)) {
       return false;
     }
-    // dd($qdocResponse, $qdocRequest);
 
     $xmlResp = simplexml_load_string($qdocResponse);
 
