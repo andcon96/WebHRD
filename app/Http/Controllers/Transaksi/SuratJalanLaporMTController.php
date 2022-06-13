@@ -66,6 +66,7 @@ class SuratJalanLaporMTController extends Controller
             $somstr = SalesOrderMstr::findOrFail($request->idmstr);
             $somstr->so_remark = $request->remark;
             $somstr->so_effdate = $request->effdate;
+            $somstr->so_status = 'Closed';
             $somstr->save();
 
 
@@ -113,6 +114,11 @@ class SuratJalanLaporMTController extends Controller
         // dd($request->all());
         DB::beginTransaction();
         try{
+            // Ubah Status Sangu
+            $sosangu = SalesOrderSangu::findOrFail($request->idsangu[0]);
+            $sosangu->so_status = 'Closed';
+            $sosangu->save();
+
             // Save SJ
             foreach($request->idhist as $key => $idhist){
                 $sohist = SOHistTrip::findOrFail($idhist);

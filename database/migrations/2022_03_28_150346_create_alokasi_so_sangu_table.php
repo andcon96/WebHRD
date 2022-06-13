@@ -21,7 +21,7 @@ class CreateAlokasiSoSanguTable extends Migration
             $table->foreign('sos_truck')->references('id')->on('truckdriver')->onDelete('restrict');
             $table->string('sos_sangu');
             $table->integer('sos_tot_trip');
-            $table->enum('so_status',['Open','Selesai'])->default('Open');
+            $table->enum('so_status',['Open','Selesai','Closed'])->default('Open');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
