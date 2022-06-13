@@ -56,7 +56,7 @@ class CheckInOutController extends Controller
 
         $data = $data->with('getActiveDriver.getUser','getActiveDriver.getLastCheckInOut')->get();
 
-        dd($data);
+        // dd($data);
 
         return view('transaksi.checkinout.index',compact('data','truckDriver','truck'));
     }
