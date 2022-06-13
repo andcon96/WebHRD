@@ -15,4 +15,9 @@ class Truck extends Model
     {
         return $this->hasMany(TruckDriver::class, 'truck_no_polis');
     }
+
+    public function getActiveDriver()
+    {
+        return $this->hasOne(TruckDriver::class, 'truck_no_polis')->where('truck_is_active',1);
+    }
 }

@@ -17,29 +17,56 @@ class CheckInOutController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user()->id;
-        $truckDriver = TruckDriver::with('getTruck')->where('truck_user_id',$user)->where('truck_is_active',1)->first();
+        $truckDriver = TruckDriver::with('getTruck')
+                                ->where('truck_user_id',$user)
+                                ->where('truck_is_active',1)
+                                ->first();
         $truck = Truck::get();
         
-        $data = CheckInOut::query();
+        // $data = CheckInOut::query();
+        // if($truckDriver){
+        //     $data->where('cio_truck_driver',$truckDriver->id);
+        // }else{
+        //     if($request->polis){
+        //         $search = TruckDriver::with('getTruck')
+        //                             ->whereRelation('getTruck','id','=',$request->polis)
+        //                             ->where('truck_is_active',1)
+        //                             ->first();
+        //         $data->where('cio_truck_driver',$search->id ?? 0);
+        //     }
+        // }
+
+        // $data = $data->with('getTruckDriver.getTruck','getTruckDriver.getUser')->orderBy('created_at','DESC')->paginate(10);
+
+        $data = Truck::query();
 
         if($truckDriver){
-            $data->where('cio_truck_driver',$truckDriver->id);
+            $data->whereRelation('getTruckDriver.getLastCheckInOut',
+                                'cio_truck_driver',$truckDriver->id);
         }else{
             if($request->polis){
                 $search = TruckDriver::with('getTruck')
                                     ->whereRelation('getTruck','id','=',$request->polis)
                                     ->where('truck_is_active',1)
                                     ->first();
-                $data->where('cio_truck_driver',$search->id ?? 0);
+                $data->whereRelation('getTruckDriver.getLastCheckInOut',
+                                'cio_truck_driver',$search->id ?? 0);
             }
         }
 
-
-        $data = $data->with('getTruckDriver.getTruck','getTruckDriver.getUser')->orderBy('created_at','DESC')->paginate(10);
+        $data = $data->with('getActiveDriver.getUser','getActiveDriver.getLastCheckInOut')->get();
 
         return view('transaksi.checkinout.index',compact('data','truckDriver','truck'));
     }
     
+
+    public function show(Request $request, $id)
+    {
+        $data = Truck::with('getActiveDriver.getAllCheckInOut')->findOrFail($id);
+
+        return view('transaksi.checkinout.show',compact('data'));
+    }
+
     public function store(Request $request)
     {
         // dd($request->all());

@@ -28,14 +28,16 @@
         <div class="col-sm-12 col-md-2 mt-2" id='btn'>
             @if(!$truckDriver)
             <input type="submit" class="btn bt-ref" id="btnsearch" value="Search" style="margin-left:15px;" />
-            @else
-            <a href="" class="editUser btn bt-ref" data-toggle="modal" data-target="#editModal">Check In / Out</a>
             @endif
         </div>
     </div>
 </form>
 
-@include('transaksi.checkinout.index-table')
+@if(!$truckDriver)
+  @include('transaksi.checkinout.index-table-admin')
+@else
+  @include('transaksi.checkinout.index-table-driver')
+@endif
 
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
