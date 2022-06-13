@@ -27,9 +27,9 @@
             <div class="col-md-3">
                 <select name="type" id="type" class="form-control" required>
                     <option value="">Select Data</option>
-                    <option value="Berat">Berat</option>
-                    <option value="Rits">Rits</option>
-                    <option value="Shift">Shift</option>
+                    <option value="BERAT">Berat</option>
+                    <option value="RITS">Rits</option>
+                    <option value="SHIFT">Shift</option>
                 </select>
             </div>
         </div>
