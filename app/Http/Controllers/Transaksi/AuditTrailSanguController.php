@@ -40,7 +40,7 @@ class AuditTrailSanguController extends Controller
             $data->where('sos_truck',$request->idtruckdriver);
         }
 
-        $data = $data->paginate(10);
+        $data = $data->orderBy('created_at','DESC')->paginate(10);
 
         return view('transaksi.sangu.audittrail.index',compact('data','listso','truckdriver','listcust'));
     }

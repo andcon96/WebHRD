@@ -30,11 +30,12 @@ class TripLaporMTController extends Controller
 
         if ($request->truck) {
             $data->whereRelation('getSangu.getTruckDriver.getTruck', 'id', $request->truck);
-            $data = $data->orderBy('created_at', 'DESC')->take(5)->get();
+            $data = $data->orderBy('created_at', 'DESC')->get();
         } else {
             if ($truckUser) {
                 $data = SalesOrderSangu::with(['getMaster','getTruckDriver.getTruck'])
                                        ->whereRelation('getTruckDriver.getTruck','id',$truckUser->getTruck->id)
+                                       ->where('so_status','!=','Closed')
                                        ->orderBy('created_at','DESC')
                                        ->get();
                 // $data->whereRelation('getSangu.getTruckDriver.getTruck', 'id', $truckUser->getTruck->id);
