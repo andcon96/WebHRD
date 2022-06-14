@@ -157,11 +157,12 @@
     });
 
     $(document).on('keyup', '.sangu', function() {
-        var data = $(this).val();
+        letterRegex = /[^\0-9\,]/;
+            var data = $(this).val();
 
-        var newdata = data.replace(/,/g, '');
-        console.log(Number(newdata).toLocaleString('en-US'));
-        $(this).val(Number(newdata).toLocaleString('en-US'));
+            var newdata = data.replace(/([^0-9])/g, '');
+
+            $(this).val(Number(newdata).toLocaleString('en-US'));
     });
 
     $(document).on('click','.deltrip',function(){
