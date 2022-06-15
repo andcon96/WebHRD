@@ -55,6 +55,7 @@ class SalesOrderMstr extends Model
         self::addGlobalScope(function(Builder $builder){
             // $builder->where('user_id', '=', Auth()->user()->id);
             $builder->where('so_domain', Session::get('domain'));
+            $builder->orderBy('created_at','DESC');
         });
     }
 }

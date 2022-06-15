@@ -66,8 +66,6 @@ class SuratJalanLaporMTController extends Controller
             $somstr = SalesOrderMstr::findOrFail($request->idmstr);
             $somstr->so_remark = $request->remark;
             $somstr->so_effdate = $request->effdate;
-            $somstr->so_status = 'Closed';
-            $somstr->save();
 
 
             $totalship = 0;
@@ -79,13 +77,20 @@ class SuratJalanLaporMTController extends Controller
                 $sodetail->sod_qty_ship = $totalship;
                 $sodetail->save();
             }
+            $cekdetail = SalesOrderDetail::query()
+                                    ->where('sod_so_mstr_id',$request->idmstr)
+                                    ->whereRaw('sod_qty_ord > sod_qty_ship')
+                                    ->first();
+            if(!$cekdetail){
+                $somstr->so_status = 'Closed';
+                $somstr->save();
+            }
 
             DB::commit();
             alert()->success('Success', 'Surat Jalan Berhasil Disimpan')->persistent('Dismiss');
             return back();
         }catch(Exception $e){
             DB::rollback();
-            dd($e);
             alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');
             return back();
         }
@@ -116,8 +121,18 @@ class SuratJalanLaporMTController extends Controller
         try{
             // Ubah Status Sangu
             $sosangu = SalesOrderSangu::findOrFail($request->idsangu[0]);
-            $sosangu->so_status = 'Closed';
-            $sosangu->save();
+            $histtrip = SOHistTrip::query()
+                                  ->where('soh_so_mstr_id',$sosangu->sos_so_mstr_id)
+                                  ->where('soh_driver',$sosangu->sos_truck)
+                                  ->where('soh_sj','!=','')
+                                  ->get();
+            $totalhisttrip = $histtrip->count();
+            
+            if($sosangu->sos_tot_trip == $totalhisttrip){
+                $sosangu->so_status = 'Closed';
+                $sosangu->save();
+            }
+            
 
             // Save SJ
             foreach($request->idhist as $key => $idhist){

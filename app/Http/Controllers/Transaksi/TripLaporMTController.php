@@ -117,8 +117,10 @@ class TripLaporMTController extends Controller
                                               ->count();
                 if($sisaSOSangu == 0){
                     $so_mstr = SalesOrderMstr::find($request->idmaster);
-                    $so_mstr->so_status = 'Selesai';
-                    $so_mstr->save();
+                    if($so_mstr->so_status != 'Closed' && $so_mstr->so_status != 'Cancelled'){
+                        $so_mstr->so_status = 'Selesai';
+                        $so_mstr->save();
+                    }
                 }
             }
 
