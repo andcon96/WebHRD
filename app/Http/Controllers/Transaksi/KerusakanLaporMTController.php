@@ -41,10 +41,10 @@ class KerusakanLaporMTController extends Controller
 
     public function show($id)
     {
-        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruckDriver.getTruck', 'getTruckDriver.getUser','getMekanik.getStruktur'])->findOrFail($id);
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruckDriver.getTruck', 'getTruckDriver.getUser','getMekanik.getStruktur','getMekanik.getDetail.getKerusakan'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
         $struktur = StrukturKerusakan::get();
-
+        // dd($data->getMekanik);
         return view('transaksi.kerusakan.show', compact('data', 'jeniskerusakan', 'struktur'));
     }
 
@@ -161,6 +161,7 @@ class KerusakanLaporMTController extends Controller
 
     public function upassignkr($id, Request $request)
     {
+        // dd($request->all());
         DB::beginTransaction();
         try {
             // Update Detail
@@ -176,12 +177,14 @@ class KerusakanLaporMTController extends Controller
             }
 
             // Assign Mekanik
-            foreach ($request->mekanik_id as $keys => $datas) {
-                $struktur_detail = KerusakanStrukturDetail::firstOrNew([
+            foreach ($request->struk_mekanik_id as $keys => $datas) {
+                $struktur_detail = KerusakanStrukturDetail::updateOrCreate([
                     'kerusakan_struktur_id' => $datas,
-                    'kerusakan_mstr_id' => $request->idmaster
+                    'kerusakan_mstr_id' => $request->idmaster,
+                    'kerusakan_struktur_detail_id' => $request->struk_detail_id[$keys]
                 ]);
-                $struktur_detail->kerusakan_mekanik = $request->mekanik_desc[$keys];
+
+                $struktur_detail->kerusakan_mekanik = $request->struk_desc[$keys];
                 $struktur_detail->save();
             }
 
@@ -189,7 +192,7 @@ class KerusakanLaporMTController extends Controller
             $krmstr = KerusakanMstr::findOrFail($request->idmaster);
             $krmstr->kerusakan_status = 'Ongoing';
             $krmstr->save();
-
+            
             DB::commit();
             alert()->success('Success', 'Kerusakan berhasil dilaporkan')->persistent('Dismiss');
             return redirect()->route('laporkerusakan.index');

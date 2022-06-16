@@ -18,7 +18,7 @@ class CreateKerusakanStrukturTable extends Migration
             $table->unsignedBigInteger('kerusakan_mstr_id')->index();
             $table->foreign('kerusakan_mstr_id')->references('id')->on('kerusakan_mstr')->onDelete('restrict');
             $table->unsignedBigInteger('kerusakan_struktur_id')->index();
-            $table->foreign('kerusakan_struktur_id')->references('id')->on('struktur_lapor_kerusakan')->onDelete('restrict');
+            $table->foreign('kerusakan_struktur_id')->references('id')->on('struktur_lapor_kerusakan')->onDelete('cascade');
             $table->string('kerusakan_mekanik');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

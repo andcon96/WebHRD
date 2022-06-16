@@ -25,7 +25,7 @@ class KerusakanMstr extends Model
 
     public function getMekanik()
     {
-        return $this->hasMany(KerusakanStrukturDetail::class, 'kerusakan_mstr_id');
+        return $this->hasMany(KerusakanStrukturDetail::class, 'kerusakan_mstr_id', 'id');
     }
 
 }

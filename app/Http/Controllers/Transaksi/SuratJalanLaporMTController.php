@@ -116,7 +116,6 @@ class SuratJalanLaporMTController extends Controller
 
     public function updatecatatsj(Request $request)
     {
-        // dd($request->all());
         DB::beginTransaction();
         try{
             // Ubah Status Sangu
