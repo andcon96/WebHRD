@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
         {
             $data[$i] = [
                 'name' => $faker->name,
-                'username' => $faker->userName,
+                'username' => 'admin'.$i,
                 'email' => $faker->unique()->safeEmail,
                 'role_id' => Role::all()->random()->id,
                 'role_type_id' => RoleType::all()->random()->id,
